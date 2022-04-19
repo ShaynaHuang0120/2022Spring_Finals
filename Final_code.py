@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 def read_data(file: str) -> pd.DataFrame:
     """
     this function is used to turn csv file into dataframe
@@ -10,7 +11,8 @@ def read_data(file: str) -> pd.DataFrame:
     df = pd.read_csv(file)
     return df
 
-def data_process(df:pd.DataFrame, column,value) -> pd.DataFrame:
+
+def data_process(df: pd.DataFrame, column, value) -> pd.DataFrame:
     """
     this function used to import and process the data
     :param df: dataframe that need to process
@@ -18,9 +20,9 @@ def data_process(df:pd.DataFrame, column,value) -> pd.DataFrame:
     :param value: rows with the value will be deleted
     :return: dataframe that are processed
     """
-    df1= df.dropna()
+    df1 = df.dropna()
     df2 = df1[df1[column].notna()]
-    df2.drop(df2[df2[column] == value].index, inplace = True)
+    df2.drop(df2[df2[column] == value].index, inplace=True)
     df2[column] = df2[column].astype(int)
     return df2
 
@@ -43,7 +45,7 @@ def total_pitstop(pitstop_table: pd.DataFrame):
 
 
 def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
-    joined_table = df_a.merge(df_b, on = merge_key)
+    joined_table = df_a.merge(df_b, on=merge_key)
     boxplot_base = joined_table[boxplot_data]
     boxplot = boxplot_base.boxplot(by="stop")
     boxplot.plot()
@@ -54,15 +56,10 @@ def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
     # return(output)
 
 
-
-
 if __name__ == '__main__':
     pitstops_file = read_data("data/pit_stops.csv")
     results_file = read_data("data/results.csv")
     total_pitstop = total_pitstop(pitstops_file)
     process = data_process(results_file, "position", "\\N")
-    plot = pitstop_boxplot(total_pitstop, process, ["raceId", "driverId"],["stop", "position"])
+    plot = pitstop_boxplot(total_pitstop, process, ["raceId", "driverId"], ["stop", "position"])
     # print(plot)
-
-
-
