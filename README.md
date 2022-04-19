@@ -20,6 +20,9 @@ Project Type: Type 1
 
 ### 1.2 Hypothesis: The pit stops are evenly distributed
 
+![](https://i.imgur.com/1aBZcI1.png)
+
+
 
 
 ### 1.3 Hypothesis: Evenly distributed pit stops give better race results
