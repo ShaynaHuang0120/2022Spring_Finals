@@ -42,16 +42,27 @@ def total_pitstop(pitstop_table: pd.DataFrame):
     return (pitstop_groupby)
 
 
-def join_table(table_a, table_b, key_list):
-    joined_table = table_a.merge(table_b, on=key_list)
-    return joined_table
+def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
+    joined_table = df_a.merge(df_b, on = merge_key)
+    boxplot_base = joined_table[boxplot_data]
+    boxplot = boxplot_base.boxplot(by="stop")
+    boxplot.plot()
+
+    plt.show()
+    # plt.title("")
+
+    # return(output)
+
 
 
 
 if __name__ == '__main__':
     pitstops_file = read_data("data/pit_stops.csv")
-    result = total_pitstop(pitstops_file)
-    process = results_data_process(results_file, "position", "\\N")
-    print(process)
+    results_file = read_data("data/results.csv")
+    total_pitstop = total_pitstop(pitstops_file)
+    process = data_process(results_file, "position", "\\N")
+    plot = pitstop_boxplot(total_pitstop, process, ["raceId", "driverId"],["stop", "position"])
+    # print(plot)
+
 
 
