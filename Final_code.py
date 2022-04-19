@@ -42,6 +42,10 @@ def total_pitstop(pitstop_table: pd.DataFrame):
     return (pitstop_groupby)
 
 
+def join_table(table_a, table_b, key_list):
+    joined_table = table_a.merge(table_b, on=key_list)
+    return joined_table
+
 
 
 if __name__ == '__main__':
