@@ -8,7 +8,7 @@ Group Members:
 
 Project Type: Type 1
 
-### Catalog
+### Contents
 1. Pit Stop Strategies
    1. Hypothesis: Fewer pit stops give the driver a better rank in each race 
    2. Hypothesis: The pit stops are evenly distributed 
@@ -19,5 +19,7 @@ Project Type: Type 1
 ### 1.1 Hypothesis: Fewer pit stops give the driver a better rank in each race
 
 ### 1.2 Hypothesis: The pit stops are evenly distributed
+
+
 
 ### 1.3 Hypothesis: Evenly distributed pit stops give better race results
