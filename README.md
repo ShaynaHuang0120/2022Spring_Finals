@@ -20,7 +20,9 @@ Project Type: Type 1
 
 ### 1.2 Hypothesis: The pit stops are evenly distributed
 
-![](https://i.imgur.com/1aBZcI1.png)
+![](https://i.imgur.com/Pej6HqC.jpg)
+
+We want to find if the pit stops are evenly distributed, since 
 
 As shown, for each number of pit stops a team chose for the entire race, there appears to be a pattern in when they chose to pit stop. 
 
@@ -35,6 +37,8 @@ Learning the distribution of each group of time points follows and given the fac
 
 
 ### 1.3 Hypothesis: Evenly distributed pit stops give better race results
+
+![](https://i.imgur.com/A0KTICx.jpg)
 
 
 
