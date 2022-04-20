@@ -55,12 +55,12 @@ def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
     joined_table = df_a.merge(df_b, on = merge_key)
     boxplot_base = joined_table[boxplot_data]
     boxplot = boxplot_base.boxplot(by="stop")
+    # return boxplot
     boxplot.plot()
+    plt.show()
 
-    # plt.show()
-    # plt.title("")
 
-    # return(output)
+
 
 def stop_chart(df_a, df_b, df_c, merge_key1: list, merge_key2, pit_stop: int):
     """
@@ -82,7 +82,8 @@ def stop_chart(df_a, df_b, df_c, merge_key1: list, merge_key2, pit_stop: int):
         position_count = decade_table[decade_table['stop'] == i].groupby(['position'])["driverId"].count().reset_index(name='count')
         # create bar graph
         position_count.plot.bar(x='position', y='count', fontsize='9')
-        stop = "pit stop = "+ str(i)
+        # plt.xticks(rotation='90')
+        stop = "pit stop = " + str(i)
         plt.title(stop)
         plt.show()
 
@@ -92,11 +93,8 @@ if __name__ == '__main__':
     races_file = read_data("data/races.csv")
     total_pitstop = total_pitstop(pitstops_file)
     process = data_process(results_file, "position", "\\N")
-    plot = pitstop_boxplot(total_pitstop, process, ["raceId", "driverId"],["stop", "position"])
-    # print(plot)
-
-    joined = stop_chart(process,total_pitstop, races_file, ["raceId", "driverId"], ['raceId'], 3)
-    # print(joined)
+    pitstop_boxplot(total_pitstop, process, ["raceId", "driverId"],["stop", "position"])
+    stop_chart(process,total_pitstop, races_file, ["raceId", "driverId"], ['raceId'], 3)
 
 
 
