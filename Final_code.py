@@ -45,12 +45,12 @@ def total_pitstop(pitstop_table: pd.DataFrame):
 
 def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
     """
-    this function used to show the boxplot
+    this function used to create the boxplot which shows the race result of different amount of pit stop
     :param df_a: table to join
     :param df_b: table to join
     :param merge_key: tables are joined based on merge_key
     :param boxplot_data: data used for boxplot
-    :return: boxplot
+    :return: boxplot shows the race result of different amount of pit stop
     """
     joined_table = df_a.merge(df_b, on = merge_key)
     boxplot_base = joined_table[boxplot_data]
@@ -88,19 +88,21 @@ def stop_chart(combined_table:pd.DataFrame, pit_stop: int):
     :param merge_key1: table a and table b are joined based on merge_key 1
     :param merge_key2: the seconded join is based on the merge_key 2
     :param pit_stop: number of pit stop we want to explore
-    :return:
+    :return: bar chart shows the count of positions in history records when taking 1, 2 or 3 pit stops
     """
 
     for i in range(1, pit_stop+1):
         position_count = combined_table[combined_table['stop'] == i].groupby(['position'])["driverId"].count().reset_index(name='count')
-        # create bar graph
         position_count.plot.bar(x='position', y='count', fontsize='9')
         # plt.xticks(rotation='90')
         stop = "pit stop = " + str(i)
         plt.title(stop)
         plt.show()
 
-# def circuit_stop_chart(df_a, df_b, df_c, merge_key1: list, merge_key2, pit_stop: int):
+# def circuit_stop_chart(combined_table:pd.DataFrame, pit_stop: int):
+
+
+
 
 
 
@@ -114,6 +116,7 @@ if __name__ == '__main__':
     pitstop_boxplot(total_pitstop, process, ["raceId", "driverId"],["stop", "position"])
     combined_table = tables_combined(process,total_pitstop, races_file, ["raceId", "driverId"], ['raceId'], 10)
     stop_chart(combined_table, 3)
+    # circuit_stop_chart(combined_table, 3)
 
 
 
