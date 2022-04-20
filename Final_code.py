@@ -65,33 +65,26 @@ def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
 def stop_chart(df_a, df_b, df_c, merge_key1: list, merge_key2, pit_stop: int):
     """
 
-    :param df_a:
-    :param df_b:
-    :param df_c:
-    :param merge_key1:
-    :param merge_key2:
+    :param df_a: table to join
+    :param df_b: table to join
+    :param df_c: table to join
+    :param merge_key1: table a and table b are joined based on merge_key 1
+    :param merge_key2: the seconded join is based on the merge_key 2
     :param pit_stop: number of pit stop we want to explore
     :return:
     """
     current_year = datetime.datetime.now().year  # get current year
     joined_table = pd.merge(pd.merge(df_a, df_b, on=merge_key1), df_c, on=merge_key2, how='left')
-    # joined_table = df_a.merge(df_b, on=merge_key)
     #race in the past decade
     decade_table = joined_table = joined_table.loc[(current_year - joined_table['year']) <= 10]
     decade_table["stop"] = decade_table["stop"].astype(int)
     for i in range(1, pit_stop+1):
         position_count = decade_table[decade_table['stop'] == i].groupby(['position'])["driverId"].count().reset_index(name='count')
-        # print(i, position_count)
-        fig = plt.figure()
-        ax = fig.add_axes([0, 0, 1, 1])
-        ax.bar(position_count['position'], position_count['count'])
-        plt.title("stop")
+        # create bar graph
+        position_count.plot.bar(x='position', y='count', fontsize='9')
+        stop = "pit stop = "+ str(i)
+        plt.title(stop)
         plt.show()
-    # print(a)
-
-
-    # print(decade_table[["raceId", "driverId", 'year', 'stop', 'position', "circuitId"]].sort_values(by=['position']))
-
 
 if __name__ == '__main__':
     pitstops_file = read_data("data/pit_stops.csv")
