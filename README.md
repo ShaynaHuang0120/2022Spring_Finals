@@ -20,7 +20,7 @@ Project Type: Type 1
 
 ### 1.2 Hypothesis: The pit stops are evenly distributed
 
-![](https://i.imgur.com/1aBZcI1.png)
+![](https://i.imgur.com/xPSq6wV.jpg)
 
 As shown, for each number of pit stops a team chose for the entire race, there appears to be a pattern in when they chose to pit stop. 
 
@@ -36,7 +36,22 @@ Learning the distribution of each group of time points follows and given the fac
 
 ### 1.3 Hypothesis: Evenly distributed pit stops give better race results
 
+![](https://i.imgur.com/Bqt9pgr.jpg)
 
+We are also interested in whether the racing results are influenced by the pit stop distributing strategies, 
+so we hypothesize that the evenly distributed pit stops give better race results. 
+
+From the plots above, we can tell that the pit distributions of the higher ranking results are more evenly distributed across the entire race than the lower ranking results. The differences are also statistically significant given an alpha of 0.05 for the first and the last pit stop if the driver pits three times in a race.
+
+![](https://i.imgur.com/NBSXmX3.png)
+
+We can also use the average distance of how far the lap proportions are away from the evenly divided points, 
+grouping them by each race and each driver so that we can treat the pit distributing strategy of each race as a whole.
+Similarly, we compare the results of higher ranking drivers with the lower ranking drivers and test them with Kolmogorov–Smirnov test, resulting in a p-value of 0.001, meaning that the test is significant against the 0.05 significance level.
+
+
+Thus, we concluded that we accept the hypothesis that the evenly distributed pit stops give better racing results.
+ 
 
 
 
