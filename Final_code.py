@@ -75,7 +75,7 @@ def tables_combined(df_a, df_b, df_c, merge_key1: list, merge_key2, time_conditi
     joined_table = pd.merge(pd.merge(df_a, df_b, on=merge_key1), df_c, on=merge_key2, how='left')
     decade_table = joined_table = joined_table.loc[(current_year - joined_table['year']) <= time_condition]
     decade_table["stop"] = decade_table["stop"].astype(int)
-    print(decade_table[['year', "circuitId"]])
+    # print(decade_table[['year', "circuitId"]])
     return decade_table
 
 #Question: do we need to consider circuit id?
