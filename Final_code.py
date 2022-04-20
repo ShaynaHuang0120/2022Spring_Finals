@@ -21,7 +21,7 @@ def data_process(df:pd.DataFrame, column,value) -> pd.DataFrame:
     """
     df1= df.dropna()
     df2 = df1[df1[column].notna()]
-    df2.drop(df2[df2[column] == value].index, inplace = True)
+    df2.drop(df2[df2[column] == value].index, inplace=True)
     df2[column] = df2[column].astype(int)
     return df2
 
@@ -57,7 +57,7 @@ def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
     boxplot = boxplot_base.boxplot(by="stop")
     boxplot.plot()
 
-    plt.show()
+    # plt.show()
     # plt.title("")
 
     # return(output)
@@ -80,8 +80,13 @@ def stop_chart(df_a, df_b, df_c, merge_key1: list, merge_key2, pit_stop: int):
     decade_table = joined_table = joined_table.loc[(current_year - joined_table['year']) <= 10]
     decade_table["stop"] = decade_table["stop"].astype(int)
     for i in range(1, pit_stop+1):
-        b = decade_table[decade_table['stop'] == i].groupby(['position'])["driverId"].count().reset_index(name='count')
-        print(i, b)
+        position_count = decade_table[decade_table['stop'] == i].groupby(['position'])["driverId"].count().reset_index(name='count')
+        # print(i, position_count)
+        fig = plt.figure()
+        ax = fig.add_axes([0, 0, 1, 1])
+        ax.bar(position_count['position'], position_count['count'])
+        plt.title("stop")
+        plt.show()
     # print(a)
 
 
@@ -98,7 +103,7 @@ if __name__ == '__main__':
     # print(plot)
 
     joined = stop_chart(process,total_pitstop, races_file, ["raceId", "driverId"], ['raceId'], 3)
-    print(joined)
+    # print(joined)
 
 
 
