@@ -12,8 +12,8 @@ Project Type: Type 1
 
 New General Research Topic:
 - What are factors that influence the F1 Racing rank?
-  - Car constructors and drivers,
-  - the time for each lap 
+  - Car constructors
+  - the time/speed for each lap 
   - Pit stop 
 
 1. Pit Stop Strategies
