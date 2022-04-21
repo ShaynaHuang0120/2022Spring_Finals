@@ -9,6 +9,13 @@ Group Members:
 Project Type: Type 1
 
 ### Contents
+
+New General Research Topic:
+- What are factors that influence the F1 Racing rank?
+  - Car constructors and drivers,
+  - the time for each lap 
+  - Pit stop 
+
 1. Pit Stop Strategies
    1. Hypothesis: Fewer pit stops give the driver a better rank in each race 
    2. Hypothesis: The pit stops are evenly distributed 
