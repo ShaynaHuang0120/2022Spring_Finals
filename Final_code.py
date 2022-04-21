@@ -19,7 +19,7 @@ def data_process(df:pd.DataFrame, column,value) -> pd.DataFrame:
     :param value: rows with the value will be deleted
     :return: dataframe that are processed
     """
-    df1= df.dropna()
+    df1 = df.dropna()
     df2 = df1[df1[column].notna()]
     df2.drop(df2[df2[column] == value].index, inplace=True)
     df2[column] = df2[column].astype(int)
