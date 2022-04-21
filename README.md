@@ -38,7 +38,9 @@ However, the histograms appear that the data groups are normally distributed, an
 
 Under such assumption and given a significance level of alpha = 0.05, we used T-tests on the groups of time points in different combinations, resulting in p-values all under 0.05, and thus we accept that each group of time points follows a distinct distribution.
 
-Learning the distribution of each group of time points follows and given the fact that the means of each group are around the evenly dividing points (1/2, 1/3, 2/3, 1/4, ...) for all 3 kinds of the total number of pit stops, we determine that the time points of the pit-stopping are evenly distributed.
+Learning the distribution of each group of time points follows and given the fact that the means of each group are around the evenly dividing points (1/2, 1/3, 2/3, 1/4, ...) for all 3 kinds of the total number of pit stops, we determine that the time points of the pit-stopping are not evenly distributed.
+
+//////////////// Editing in Progress ////////////////
 
 
 ### 1.3 Hypothesis: Evenly distributed pit stops give better race results
