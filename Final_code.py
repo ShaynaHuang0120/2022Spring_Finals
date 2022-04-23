@@ -8,8 +8,8 @@ from typing import List
 def merge_data(_df_list: List[pd.DataFrame]) -> pd.DataFrame:
     """
     merges the dataframes according to their primary/foreign keys
-    :param _df_list:
-    :return:
+    :param _df_list: list of dataframes to be merged
+    :return: the merged dataframe
     """
     # set up internal parameters
     suffixes = ['_1', '_2']
