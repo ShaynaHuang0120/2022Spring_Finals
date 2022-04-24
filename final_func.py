@@ -85,7 +85,11 @@ def process_data(mg_df: pd.DataFrame, normal_status=True) -> pd.DataFrame:
     mg_df = pd.merge(mg_df, _total_stops, on=['raceId', 'driverId'])
     # 5. calculate how far the lap proportion deviates from the ideal even distribution for each pit record
     mg_df['lap_prop'] = mg_df.apply(lambda x: x['lap'] / x['total_laps'], axis=1)
-    mg_df['abs_err'] = mg_df.apply(lambda x: abs(x['stop'] / (x['total_stops'] + 1) - x['lap_prop']), axis=1)
+    mg_df['abs_deviation'] = mg_df.apply(lambda x: abs(x['stop'] / (x['total_stops'] + 1) - x['lap_prop']), axis=1)
+    # 6. deviation mean, grouped by each driver in each race
+    avg_deviation = pd.DataFrame(mg_df.groupby(['raceId', 'driverId'])['abs_deviation'].mean())
+    avg_deviation = avg_deviation.add_suffix('_mean').reset_index()
+    mg_df = pd.merge(mg_df, avg_deviation, on=['raceId', 'driverId'])
     return mg_df
 
 
@@ -164,7 +168,7 @@ def front_back_division(mg_df: pd.DataFrame, select_col='lap_prop', max_pit=3, t
     """
     Hypothesis 3 Function
     divide the dataframe into 2 groups: with positions before No.top_num(5) and after No.top_num(5).
-    then, split each group into list.
+    then, split each group into list
     :param mg_df: the merged and processed dataframe
     :param select_col: the numeric column to be studied
     :param max_pit: the maximum number of total pit stops in consideration
@@ -174,12 +178,17 @@ def front_back_division(mg_df: pd.DataFrame, select_col='lap_prop', max_pit=3, t
     """
     df_front = []
     df_back = []
-    for i in range(1, max_pit + 1):
-        df_tmp = mg_df[mg_df['total_stops'] == i]
-        for j in range(1, i + 1):
-            df_select = df_tmp[df_tmp['stop'] == j]
-            df_front.append(df_select[df_select['positionOrder'] <= top_num][['stop', select_col]])
-            df_back.append(df_select[df_select['positionOrder'] > top_num][['stop', select_col]])
+    if select_col == 'abs_deviation_mean':
+        df_tmp = mg_df[['raceId', 'driverId', 'positionOrder', 'abs_deviation_mean']].drop_duplicates()
+        df_front = df_tmp[df_tmp['positionOrder'] <= top_num]['abs_deviation_mean']
+        df_back = df_tmp[df_tmp['positionOrder'] > top_num]['abs_deviation_mean']
+    else:
+        for i in range(1, max_pit + 1):
+            df_tmp = mg_df[mg_df['total_stops'] == i]
+            for j in range(1, i + 1):
+                df_select = df_tmp[df_tmp['stop'] == j]
+                df_front.append(df_select[df_select['positionOrder'] <= top_num][['stop', select_col]])
+                df_back.append(df_select[df_select['positionOrder'] > top_num][['stop', select_col]])
 
     return df_front, df_back
 
