@@ -8,53 +8,6 @@ from scipy.stats import mannwhitneyu
 from sklearn.utils import resample
 
 
-def merge_data(_df_list: List[pd.DataFrame]) -> pd.DataFrame:
-    """
-    merges the dataframes according to their primary/foreign keys
-    :param _df_list: list of dataframes to be merged
-    :return: the merged dataframe
-    """
-    # set up internal parameters
-    suffixes = ['_1', '_2']
-    r = re.compile('\w*Id')
-
-    # set up variables based on input
-    num = len(_df_list)  # length of the list
-    to_select = list(range(1, num))  # list of indexes of dataframe to be merged
-    remaining = set(range(1, num))  # set of remaining indexes of dataframes yet to be merged
-
-    # get all the '<something>id' columns for each dataframe
-    id_list = [set(filter(r.match, table)) for table in _df_list]
-    # set up the merged dataframe, 'mg_df'
-    mg_df = _df_list[0]
-    mg_id = id_list[0]  # set the id set of the merged dataframe as the first dataframe's id set
-
-    # start merging dataframes
-    while True:
-        merge_flag = 0  # flag indicating if a while-true run has merged any new dataframe
-        for index in to_select:
-            intersect = mg_id.intersection(id_list[index])
-            all_col_intersect = set(mg_df.columns).intersection(set(_df_list[index].columns))
-            # iterate through the remaining dataframe
-            # and merge those with common id(s)
-            if (index in remaining) and intersect:
-                if all_col_intersect == intersect:
-                    mg_df = pd.merge(mg_df, _df_list[index], on=list(intersect), how='left')
-                else:
-                    # if there are other common columns than the ids, set suffixes
-                    mg_df = pd.merge(mg_df, _df_list[index], on=list(intersect), how='left', suffixes=suffixes)
-                # add the new ids into the total id set of the merged dataframe
-                mg_id = mg_id.union(set(id_list[index]))
-                remaining.remove(index)  # remove the index of the added dataframe
-                merge_flag = 1
-        if not remaining:
-            break  # break if there is no more dataframe to be added
-        if not merge_flag:  # if no new dataframe was merged in this while-true run
-            print('Error: no common "id" columns found')
-            break  # breaks
-    return mg_df
-
-
 def read_data(file: str) -> pd.DataFrame:
     """
     this function is used to turn csv file into dataframe
