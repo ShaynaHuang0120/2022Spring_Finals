@@ -179,9 +179,12 @@ def front_back_division(mg_df: pd.DataFrame, select_col='lap_prop', max_pit=3, t
     df_front = []
     df_back = []
     if select_col == 'abs_deviation_mean':
-        df_tmp = mg_df[['raceId', 'driverId', 'positionOrder', 'abs_deviation_mean']].drop_duplicates()
-        df_front = df_tmp[df_tmp['positionOrder'] <= top_num]['abs_deviation_mean']
-        df_back = df_tmp[df_tmp['positionOrder'] > top_num]['abs_deviation_mean']
+        df_select = mg_df[
+            ['raceId', 'driverId', 'total_stops', 'positionOrder', 'abs_deviation_mean']].drop_duplicates()
+        df_tmp = df_select[df_select['positionOrder'] <= top_num][['total_stops', 'abs_deviation_mean']]
+        df_front = [df_tmp[df_tmp['total_stops'] == i] for i in range(1, max_pit + 1)]
+        df_tmp = df_select[df_select['positionOrder'] > top_num][['total_stops', 'abs_deviation_mean']]
+        df_back = [df_tmp[df_tmp['total_stops'] == i] for i in range(1, max_pit + 1)]
     else:
         for i in range(1, max_pit + 1):
             df_tmp = mg_df[mg_df['total_stops'] == i]
@@ -199,14 +202,14 @@ def comparison_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], select_col='
     Hypothesis 3 Function
     draw pairs of histograms for dataframes grouped by total pit stops number and the order of pit stop
     :param list_1: the list of dataframes with position order in the front
-    :param list_2: the list of dataframes with position order in the front
+    :param list_2: the list of dataframes with position order in the back
     :param select_col: the numeric column to be studied
     :param show_mean: if to show vertical lines of mean on the histograms
     :param show_description: if to show descriptions of tests & distribution results
     :param show_divide: if to show points where the line is divided into even segments
     :param non_para: if to use non-parametric test
     :param save_fig: if to save as picture
-    :return:
+    :return: None
     """
     bins = np.linspace(0, 1, 50)
     color_bin = ['tab:blue', 'tab:orange', 'tab:red']
@@ -244,4 +247,52 @@ def comparison_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], select_col='
             print(f'Total Pits: {_total}, no.{_pit} pit, p value={p_value}')
 
         if save_fig: plt.savefig(f'image/hypo3/distribution_{_total}_{_pit}.png', transparent=False)
+        plt.show()
+
+
+def err_mean_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=False):
+    """
+    Hypothesis 3 Function
+    :param list_1: the list of dataframes with position order in the front
+    :param list_2: the list of dataframes with position order in the back
+    :param save_fig: if to save as picture
+    :return: None
+    """
+    bins = np.linspace(0, 1, 50)
+    color_bin = ['deepskyblue', 'tab:orange', 'tomato']
+    color_bin2 = ['steelblue', 'crimson', 'lavender']
+
+    num = len(list_1)
+    for i in range(num):
+        _df_front = list_1[i]['abs_deviation_mean']
+        _df_back = list_2[i]['abs_deviation_mean']
+
+        _df_back = resample(_df_back, replace=True, n_samples=len(_df_front), random_state=123)
+        print('-' * 88)
+        plt.figure(figsize=(12, 6))
+        plt.title(f'Average Deviation Distribution, Total Pit Stops = {i + 1}')
+        plt.xlabel('Average Deviation')
+        plt.ylabel('Record Frequency (each driver from each race)')
+        plt.hist(_df_back, bins, alpha=0.8, color=color_bin[2], label='Lower Ranking')
+        plt.hist(_df_front, bins, alpha=0.8, color=color_bin[0], label='Higher Ranking')
+        plt.legend(loc="upper left")
+
+        _df_front_mean = round(_df_front.mean(), ndigits=3)
+        _df_back_mean = round(_df_back.mean(), ndigits=3)
+
+        plt.axvline(x=_df_front_mean, color=color_bin2[0], linewidth=4)
+        plt.axvline(x=_df_back_mean, color=color_bin2[1], linewidth=4)
+
+        sig_level = 0.05
+        p_value = mannwhitneyu(_df_front, _df_back).pvalue
+        print(f'Mann-Whitney U rank test p value={p_value}')
+
+        if p_value < sig_level:
+            print('     Mean of Average Deviations - ')
+            print(f'        Higher Ranking: {_df_front_mean}, Lower Ranking: {_df_back_mean}')
+            if _df_front_mean < _df_back_mean:
+                print('Higher ranking records have significantly lower mean deviations')
+            else:
+                print('Lower ranking records have significantly lower mean deviations')
+        if save_fig: plt.savefig(f'image/hypo3/err_mean.png', transparent=False)
         plt.show()
