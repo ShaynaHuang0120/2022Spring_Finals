@@ -25,20 +25,20 @@ New General Research Topic:
 
 ### 1.1 Hypothesis: Fewer pit stops give the driver a better rank in each race
 
-### 1.2 Hypothesis: The pit stops are evenly distributed
+### 1.2 Hypothesis: The pit stops are evenly distributed through time
 
 ![](https://i.imgur.com/xPSq6wV.jpg)
 
-As shown, for each number of pit stops a team chose for the entire race, there appears to be a pattern in when they chose to pit stop. 
+As shown, for each number of pit stops a team chose for the entire race, there appears to be a pattern in when they chose to pit. If the team chooses to pit only once in the entire race, they usually pit at the half of the race. If the team chooses to pit twice, they usually pit when it's near 1/3 and 2/3 of the total laps. The case is similar if they choose to pit thrice. 
 
-If the team chooses to pit stop only once in the entire race, they usually pit during the half of the race. If they choose to pit stop twice, they usually pit when it's near 1/3 and 2/3 of the total laps. The case is similar if they choose to pit thrice. 
+Noticing this pattern, we came up with the second hypothesis that the pit stops are evenly distributed through time. Our null hypothesis is that all pits are normally distributed around the points the evenly dividing points (1/2, 1/3, 2/3, etc). 
 
-Due to the discrete nature of the data, the normality tests are not applicable here and, thus, all data groups are not normally distributed by strict definition. 
-However, the histograms appear that the data groups are normally distributed, and actually, the statistical characteristics of the frequency distribution indeed resemble the characteristics of normal distributions: All of the data groups are distributed symmetrically around the mean, around 68% fall within one standard deviation, and around 95% fall within two standard deviations. Hence, we assume that pit stop time points of each group are normally distributed given a broader definition. 
+To study such a pattern, we calculated the proportion of the total laps the driver pit at for each record in the racing results. For convenience, we call this proportion 'Lap Proportion'.
+Before we start, there is one property of the Lap Proportion column that we should notice. The numeric range of the Lap Proportion is not ideally continuous. The range of values the Lap Proportion can take is actually a discrete set because the domains of values that the numerators and the denominators (i.e. laps and total laps) can only be chosen from two very limited sets. Due to the discrete nature of the data, the Lap Proportion data, grouped by any number of total pit stops, is not normally distributed by strict definition. 
 
-Under such assumption and given a significance level of alpha = 0.05, we used T-tests on the groups of time points in different combinations, resulting in p-values all under 0.05, and thus we accept that each group of time points follows a distinct distribution.
+However, the distribution statistics of these groups resemble the characteristics of normal distributions very well: All of the data groups are distributed symmetrically around the mean, with around 68% falling within one standard deviation, and with around 95% falling within two standard deviations. It would also be intuitive that such a distribution would follow a distribution similar to the normal distribution. Hence, we only assume that pit stop time points of each group are normally distributed given a broader definition. 
 
-Learning the distribution of each group of time points follows and given the fact that the means of each group are around the evenly dividing points (1/2, 1/3, 2/3, 1/4, ...) for all 3 kinds of the total number of pit stops, we determine that the time points of the pit-stopping are not evenly distributed.
+Even though, if we assume each group of data is normally distributed, we can notice that the means deviate quite a bit from the ideal dividing points (1/2, 1/3, 2/3, etc). In conclusion, we determine that the time points of the pit-stopping are not evenly distributed.
 
 //////////////// Editing in Progress ////////////////
 
