@@ -6,9 +6,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+from scipy.stats import ttest_1samp
 from scipy.stats import ttest_ind
 from scipy.stats import mannwhitneyu
 from sklearn.utils import resample
+from bioinfokit.analys import stat
 
 
 # general purpose: merge_data, process_data, pit_stop_group
@@ -123,7 +125,7 @@ def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: 
     # plot settings
     bins = np.linspace(0, 1, 50)
     color_bin = ['tab:blue', 'tab:orange', 'lightcoral']
-    color_bin2 = ['deepskyblue', 'gold', 'crimson']
+    color_bin2 = ['deepskyblue', 'orangered', 'crimson']
 
     max_num_of_stops = 3  # consider only total pit stops = 1,2,3
     for ps_num in range(1, max_num_of_stops + 1):
@@ -146,7 +148,11 @@ def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: 
             df_mean = round(df.mean(), ndigits=3)
             df_std = round(df.std(), ndigits=3)
             # show mean line (x = mean)
-            if show_mean: plt.axvline(x=df_mean, color=color_bin2[plot_count], linewidth=4)
+            # even dividing point:
+            even_divide = (plot_count+1) / (ps_num + 1)
+            if show_mean:
+                plt.axvline(x=df_mean, color=color_bin2[plot_count], linewidth=4)
+                plt.axvline(x=even_divide, color='gold', linewidth=4)
             plot_count += 1
             # show distribution description
             if show_description:
@@ -157,6 +163,8 @@ def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: 
                 perc_2 = round(100 * perc_2, ndigits=1)
                 print(f'    {perc_1}% within mean ± 1 std')
                 print(f'    {perc_2}% within mean ± 2 std')
+                t_test = ttest_1samp(a=df, popmean=even_divide)
+                print(f'     One sample T Test, mu={round(even_divide, ndigits=3)}, p value={t_test.pvalue}')
         # save as picture
         plt.legend(loc="upper left")
         if save_fig: plt.savefig(f'image/hypo2/distribution_{ps_num}.png')
@@ -294,5 +302,5 @@ def err_mean_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=False
                 print('Higher ranking records have significantly lower mean deviations')
             else:
                 print('Lower ranking records have significantly lower mean deviations')
-        if save_fig: plt.savefig(f'image/hypo3/err_mean.png', transparent=False)
+        if save_fig: plt.savefig(f'image/hypo3/err_mean_{i}.png', transparent=False)
         plt.show()
