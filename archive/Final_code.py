@@ -47,10 +47,11 @@ def total_pitstop(pitstop_table: pd.DataFrame):
     pitstop_groupby = pitstop_df.groupby(["raceId", "driverId"], as_index=False)["stop"].count()
     # print(pitstop_groupby["stop"].sum())
     pitstop_groupby.sort_values(by=["raceId", 'driverId'], inplace=True)
+    print(pitstop_groupby)
     return (pitstop_groupby)
 
 
-def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
+def pitstop_boxplot(df_a, df_b):
     """
     this function used to create the boxplot which shows the race result of different amount of pit stop
     :param df_a: table to join
@@ -59,8 +60,11 @@ def pitstop_boxplot(df_a, df_b, merge_key: list, boxplot_data: list):
     :param boxplot_data: data used for boxplot
     :return: boxplot shows the race result of different amount of pit stop
     """
-    joined_table = df_a.merge(df_b, on=merge_key)
-    boxplot_base = joined_table[boxplot_data]
+    joined_table = df_a.merge(df_b, on=["raceId", "driverId"])
+    boxplot_base = joined_table[["stop", "position"]]
+    print(joined_table)
+    # print(boxplot_base)
+    # print(boxplot_base.loc[boxplot_base['stop']==1])
     boxplot = boxplot_base.boxplot(by="stop")
     # return boxplot
     boxplot.plot()
@@ -83,6 +87,7 @@ def tables_combined(df_a, df_b, df_c, merge_key1: list, merge_key2, time_conditi
     decade_table = joined_table = joined_table.loc[(current_year - joined_table['year']) <= time_condition]
     decade_table["stop"] = decade_table["stop"].astype(int)
     # print(decade_table[['year', "circuitId"]])
+    print(decade_table)
     return decade_table
 
 
@@ -114,12 +119,12 @@ def stop_chart(combined_table: pd.DataFrame, pit_stop: int):
 
 
 if __name__ == '__main__':
-    pitstops_file = read_data("dataset/pit_stops.csv")
-    results_file = read_data("dataset/results.csv")
-    races_file = read_data("dataset/races.csv")
+    pitstops_file = read_data("../data/pit_stops.csv")
+    results_file = read_data("../data/results.csv")
+    races_file = read_data("../data/races.csv")
     total_pitstop = total_pitstop(pitstops_file)
+    # total_pitstop(pitstops_file)
     process = data_process(results_file, "position", "\\N")
-    pitstop_boxplot(total_pitstop, process, ["raceId", "driverId"], ["stop", "position"])
+    pitstop_boxplot(total_pitstop, process)
     combined_table = tables_combined(process, total_pitstop, races_file, ["raceId", "driverId"], ['raceId'], 10)
     stop_chart(combined_table, 3)
-    # circuit_stop_chart(combined_table, 3)
