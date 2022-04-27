@@ -27,7 +27,11 @@ New General Research Topic:
 
 ### 1.2 Hypothesis: The pit stops are evenly distributed through time
 
-![](https://i.imgur.com/xPSq6wV.jpg)
+If we look at the distribution of the lap proportions of the pit stops, we can notice there seems to be a pattern. Here are what they look like in histograms.
+
+![](https://i.imgur.com/WsPxIa7.png)
+![](https://i.imgur.com/B3pgzDE.png)
+![](https://i.imgur.com/ZVhOevG.png)
 
 As shown, for each number of pit stops a team chose for the entire race, there appears to be a pattern in when they chose to pit. If the team chooses to pit only once in the entire race, they usually pit at the half of the race. If the team chooses to pit twice, they usually pit when it's near 1/3 and 2/3 of the total laps. The case is similar if they choose to pit thrice. 
 
@@ -45,22 +49,41 @@ In conclusion, we reject the null hypothesis and determine that the time points 
 
 ### 1.3 Hypothesis: Evenly distributed pit stops give better race results
 
-![](https://i.imgur.com/Bqt9pgr.jpg)
+To learn about the differences in the distributions of the pit stops of different position rankings, we first divide the dataset into two categories: high ranking and low ranking. The high ranking data are those with position order higher than 6, while the low ranking data are the rest, i.e. all the data below rank 5. To balance the cardinality of the two dataset, we resample the lower ranking data to the size of the high ranking data. And then, we plot them with histograms like we did for the Hypothesis 2, and here are what we got.
 
-We are also interested in whether the racing results are influenced by the pit stop distributing strategies, 
-so we hypothesize that the evenly distributed pit stops give better race results. 
+#### Total Pit Stop = 1
+##### no. 1 pit stop
+![](https://i.imgur.com/uPzYobQ.png)
+#### Total Pit Stop = 2
+##### no. 1 pit stop
+![](https://i.imgur.com/VLSGqcK.png)
+##### no. 2 pit stop
+![](https://i.imgur.com/4IRprQS.png)
+#### Total Pit Stop = 3
+##### no. 1 pit stop
+![](https://i.imgur.com/9wuGEoW.png)
+##### no. 2 pit stop
+![](https://i.imgur.com/S6mo1UB.png)
+##### no. 3 pit stop
+![](https://i.imgur.com/rwT1js2.png)
 
-From the plots above, we can tell that the pit distributions of the higher ranking results are more evenly distributed across the entire race than the lower ranking results. The differences are also statistically significant given an alpha of 0.05 for the first and the last pit stop if the driver pits three times in a race.
+From the histogram plots above, we can tell that the pit distributions of the higher-ranking results are more evenly distributed across the entire race than the lower-ranking results.  The differences are also statistically significant given the significance level of 0.05 for some of the pit stop order, including the first pit of total 2 pit stops and the all three pits of the total 3 pit stops.
 
-![](https://i.imgur.com/NBSXmX3.png)
+![](https://i.imgur.com/Zez7YAu.png)
+![](https://i.imgur.com/7HwUJ4s.png)
+![](https://i.imgur.com/kuesDYy.png)
 
-We can also use the average distance of how far the lap proportions are away from the evenly divided points, 
-grouping them by each race and each driver so that we can treat the pit distributing strategy of each race as a whole.
-Similarly, we compare the results of higher ranking drivers with the lower ranking drivers and test them with Kolmogorov–Smirnov test, resulting in a p-value of 0.001, meaning that the test is significant against the 0.05 significance level.
+We can use an alternative view of the data to measure the deviation, by using the average deviations of how far the lap proportions of all pit records from each driver from each race are away from the evenly divided points. In this way, we can treat the pit distributing strategy of each race as a whole factor to measure how the driver performed in that race.
 
+Similarly, we compare the results of higher ranking drivers with the lower ranking drivers and test them with the non-parametric Mann-Whitney U tests, with resulting p-values ranging from 0.002 to 0.022, meaning that all of the tests are significant against the 0.05 significance level.
 
-Thus, we concluded that we accept the hypothesis that the evenly distributed pit stops give better racing results.
+Thus, we concluded that we accept the null hypothesis that the evenly distributed pit stops give better racing results.
  
+## 2. Racing Speed Strategy
+
+## 3. Result Summary and Conclusions
+
+
 
 
 
