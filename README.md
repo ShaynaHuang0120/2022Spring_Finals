@@ -36,11 +36,11 @@ Noticing this pattern, we came up with the second hypothesis that the pit stops 
 To study such a pattern, we calculated the proportion of the total laps the driver pit at for each record in the racing results. For convenience, we call this proportion 'Lap Proportion'.
 Before we start, there is one property of the Lap Proportion column that we should notice. The numeric range of the Lap Proportion is not ideally continuous. The range of values the Lap Proportion can take is actually a discrete set because the domains of values that the numerators and the denominators (i.e. laps and total laps) can only be chosen from two very limited sets. Due to the discrete nature of the data, the Lap Proportion data, grouped by any number of total pit stops, is not normally distributed by strict definition. 
 
-However, the distribution statistics of these groups resemble the characteristics of normal distributions very well: All of the data groups are distributed symmetrically around the mean, with around 68% falling within one standard deviation, and with around 95% falling within two standard deviations. It would also be intuitive that such a distribution would follow a distribution similar to the normal distribution. Hence, we only assume that pit stop time points of each group are normally distributed given a broader definition. 
+However, the distribution statistics of these groups resemble the characteristics of normal distributions very well: All the data groups are distributed symmetrically around the mean, with around 68% falling within one standard deviation, and with around 95% falling within two standard deviations. It would also be intuitive that such a distribution would follow a distribution similar to the normal distribution. Hence, we only assume that pit stop time points of each group are normally distributed given a broader definition. 
 
-Even though, if we assume each group of data is normally distributed, we can notice that the means deviate quite a bit from the ideal dividing points (1/2, 1/3, 2/3, etc). In conclusion, we determine that the time points of the pit-stopping are not evenly distributed.
+Assuming these groups of data are normally distributed, we notice that the means deviate quite a bit from the ideal dividing points (1/2, 1/3, 2/3, etc.). Using one sample T-Tests, we calculated the p values for each group, and the results show that all the p values are significantly lower than the significant level of 0.05, with differences of at least 20 orders of magnitude.
 
-//////////////// Editing in Progress ////////////////
+In conclusion, we reject the null hypothesis and determine that the time points of the pit-stopping are not evenly distributed.
 
 
 ### 1.3 Hypothesis: Evenly distributed pit stops give better race results

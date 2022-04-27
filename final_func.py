@@ -267,8 +267,8 @@ def err_mean_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=False
     :return: None
     """
     bins = np.linspace(0, 1, 50)
-    color_bin = ['deepskyblue', 'tab:orange', 'tomato']
-    color_bin2 = ['steelblue', 'crimson', 'lavender']
+    color_bin = ['tab:blue', 'tab:orange', 'tab:red']
+    color_bin2 = ['deepskyblue', 'crimson', 'lavender']
 
     num = len(list_1)
     for i in range(num):
@@ -281,8 +281,8 @@ def err_mean_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=False
         plt.title(f'Average Deviation Distribution, Total Pit Stops = {i + 1}')
         plt.xlabel('Average Deviation')
         plt.ylabel('Record Frequency (each driver from each race)')
-        plt.hist(_df_back, bins, alpha=0.8, color=color_bin[2], label='Lower Ranking')
-        plt.hist(_df_front, bins, alpha=0.8, color=color_bin[0], label='Higher Ranking')
+        plt.hist(_df_back, bins, alpha=0.9, color=color_bin[2], label='Lower Ranking')
+        plt.hist(_df_front, bins, alpha=0.9, color=color_bin[0], label='Higher Ranking')
         plt.legend(loc="upper left")
 
         _df_front_mean = round(_df_front.mean(), ndigits=3)
