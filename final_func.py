@@ -10,7 +10,6 @@ from scipy.stats import ttest_1samp
 from scipy.stats import ttest_ind
 from scipy.stats import mannwhitneyu
 from sklearn.utils import resample
-from bioinfokit.analys import stat
 
 
 # general purpose: merge_data, process_data, pit_stop_group
@@ -61,7 +60,7 @@ def merge_data(_df_list: List[pd.DataFrame]) -> pd.DataFrame:
     return mg_df
 
 
-def process_data(mg_df: pd.DataFrame, normal_status=True) -> pd.DataFrame:
+def process_data(mg_df: pd.DataFrame, normal_status=True, totals=True, deviation=True) -> pd.DataFrame:
     """
     process the data for analysis:
     1. filter normal status
@@ -69,8 +68,11 @@ def process_data(mg_df: pd.DataFrame, normal_status=True) -> pd.DataFrame:
     3. add total pit stops for each record
     4. calculate the proportion of lap when the driver pit for each pit record
     5. calculate how far the lap proportion deviates from the ideal even distribution for each pit record
+    6. calculate deviation mean, grouped by each driver in each race
     :param mg_df: the merged dataframe
-    :param normal_status: if filter the dataframe with records that are finished or +? laps away from the finished
+    :param normal_status: if true, filter the dataframe with records that are finished or +? laps away from the finished
+    :param totals: if true, calculate the total laps, total stops and lap proportions
+    :param deviation: if true, calculate the deviations and the relevant statistics
     :return: the processed dataframe
     """
     # 1. filtering normal status
@@ -78,20 +80,22 @@ def process_data(mg_df: pd.DataFrame, normal_status=True) -> pd.DataFrame:
         _status_select = [1, 11, 12, 13, 14, 15, 16, 17, 18, 19]
         mg_df.drop(mg_df[~mg_df['statusId'].isin(_status_select)].index, inplace=True)
     # 2&3. add total laps & total pit stops for each record
-    _total_laps = mg_df[(mg_df['positionOrder'] == 1) & (mg_df['stop'] == 1)].reset_index(drop=True)[['raceId', 'laps']]
-    _total_laps.columns = [str(_total_laps.columns[0]), 'total_laps']
-    _total_stops = mg_df.groupby(by=['raceId', 'driverId'], as_index=False)['stop'].max()
-    _total_stops.columns = list(_total_stops.columns[:2]) + ['total_stops']
-    # 4. calculate the proportion of lap when the driver pit for each pit record
-    mg_df = pd.merge(mg_df, _total_laps, on='raceId')
-    mg_df = pd.merge(mg_df, _total_stops, on=['raceId', 'driverId'])
-    # 5. calculate how far the lap proportion deviates from the ideal even distribution for each pit record
-    mg_df['lap_prop'] = mg_df.apply(lambda x: x['lap'] / x['total_laps'], axis=1)
-    mg_df['abs_deviation'] = mg_df.apply(lambda x: abs(x['stop'] / (x['total_stops'] + 1) - x['lap_prop']), axis=1)
-    # 6. deviation mean, grouped by each driver in each race
-    avg_deviation = pd.DataFrame(mg_df.groupby(['raceId', 'driverId'])['abs_deviation'].mean())
-    avg_deviation = avg_deviation.add_suffix('_mean').reset_index()
-    mg_df = pd.merge(mg_df, avg_deviation, on=['raceId', 'driverId'])
+    if totals:
+        _total_laps = mg_df[(mg_df['positionOrder'] == 1) & (mg_df['stop'] == 1)].reset_index(drop=True)[['raceId', 'laps']]
+        _total_laps.columns = [str(_total_laps.columns[0]), 'total_laps']
+        _total_stops = mg_df.groupby(by=['raceId', 'driverId'], as_index=False)['stop'].max()
+        _total_stops.columns = list(_total_stops.columns[:2]) + ['total_stops']
+        mg_df = pd.merge(mg_df, _total_laps, on='raceId')
+        mg_df = pd.merge(mg_df, _total_stops, on=['raceId', 'driverId'])
+        # 4. calculate the proportion of lap when the driver pit for each pit record
+        mg_df['lap_prop'] = mg_df.apply(lambda x: x['lap'] / x['total_laps'], axis=1)
+        if deviation:
+            # 5. calculate how far the lap proportion deviates from the ideal even distribution for each pit record
+            mg_df['abs_deviation'] = mg_df.apply(lambda x: abs(x['stop'] / (x['total_stops'] + 1) - x['lap_prop']), axis=1)
+            # 6. deviation mean, grouped by each driver in each race
+            avg_deviation = pd.DataFrame(mg_df.groupby(['raceId', 'driverId'])['abs_deviation'].mean())
+            avg_deviation = avg_deviation.add_suffix('_mean').reset_index()
+            mg_df = pd.merge(mg_df, avg_deviation, on=['raceId', 'driverId'])
     return mg_df
 
 
@@ -117,9 +121,9 @@ def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: 
     Hypothesis 2 Function
     draw histograms for dataframes grouped by total pit stops number and the order of pit stop
     :param _df_dict: the dictionary of dataframe, grouped using pit_stop_group
-    :param show_mean: if to show vertical lines of mean on the histograms
-    :param show_description: if to show distribution description
-    :param save_fig: if to save as picture
+    :param show_mean: if true, show vertical lines of mean on the histograms
+    :param show_description: if true, show distribution description
+    :param save_fig: if true, save as picture
     :return: None. Plots the distribution
     """
     # plot settings
@@ -212,11 +216,11 @@ def comparison_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], select_col='
     :param list_1: the list of dataframes with position order in the front
     :param list_2: the list of dataframes with position order in the back
     :param select_col: the numeric column to be studied
-    :param show_mean: if to show vertical lines of mean on the histograms
-    :param show_description: if to show descriptions of tests & distribution results
-    :param show_divide: if to show points where the line is divided into even segments
-    :param non_para: if to use non-parametric test
-    :param save_fig: if to save as picture
+    :param show_mean: if true, show vertical lines of mean on the histograms
+    :param show_description: if true, show descriptions of tests & distribution results
+    :param show_divide: if true, show points where the line is divided into even segments
+    :param non_para: if true, use non-parametric test
+    :param save_fig: if true, save as picture
     :return: None
     """
     bins = np.linspace(0, 1, 50)
@@ -263,7 +267,7 @@ def err_mean_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=False
     Hypothesis 3 Function
     :param list_1: the list of dataframes with position order in the front
     :param list_2: the list of dataframes with position order in the back
-    :param save_fig: if to save as picture
+    :param save_fig: if true, save as picture
     :return: None
     """
     bins = np.linspace(0, 1, 50)
