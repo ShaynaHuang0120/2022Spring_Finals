@@ -81,7 +81,8 @@ def process_data(mg_df: pd.DataFrame, normal_status=True, totals=True, deviation
         mg_df.drop(mg_df[~mg_df['statusId'].isin(_status_select)].index, inplace=True)
     # 2&3. add total laps & total pit stops for each record
     if totals:
-        _total_laps = mg_df[(mg_df['positionOrder'] == 1) & (mg_df['stop'] == 1)].reset_index(drop=True)[['raceId', 'laps']]
+        _total_laps = mg_df[(mg_df['positionOrder'] == 1) & (mg_df['stop'] == 1)].reset_index(drop=True)[
+            ['raceId', 'laps']]
         _total_laps.columns = [str(_total_laps.columns[0]), 'total_laps']
         _total_stops = mg_df.groupby(by=['raceId', 'driverId'], as_index=False)['stop'].max()
         _total_stops.columns = list(_total_stops.columns[:2]) + ['total_stops']
@@ -91,7 +92,8 @@ def process_data(mg_df: pd.DataFrame, normal_status=True, totals=True, deviation
         mg_df['lap_prop'] = mg_df.apply(lambda x: x['lap'] / x['total_laps'], axis=1)
         if deviation:
             # 5. calculate how far the lap proportion deviates from the ideal even distribution for each pit record
-            mg_df['abs_deviation'] = mg_df.apply(lambda x: abs(x['stop'] / (x['total_stops'] + 1) - x['lap_prop']), axis=1)
+            mg_df['abs_deviation'] = mg_df.apply(lambda x: abs(x['stop'] / (x['total_stops'] + 1) - x['lap_prop']),
+                                                 axis=1)
             # 6. deviation mean, grouped by each driver in each race
             avg_deviation = pd.DataFrame(mg_df.groupby(['raceId', 'driverId'])['abs_deviation'].mean())
             avg_deviation = avg_deviation.add_suffix('_mean').reset_index()
@@ -99,21 +101,79 @@ def process_data(mg_df: pd.DataFrame, normal_status=True, totals=True, deviation
     return mg_df
 
 
-def pit_stop_group(df: pd.DataFrame) -> dict:
+def pit_stop_group(df: pd.DataFrame, by='pit_order'):
     """
     group the records by the total number of pit stops of each racing record
+    :param by: group by what standard. 1. pit order (type a). 2. total pits (type b)
     :param df: the merged and processed dataframe
-    :return: a dictionary with total pit numbers as keys and dataframe of records as values
+    :return: (type a): a dictionary with total pit numbers as keys and dataframe of records as values; (type b): a dataframe with positional info, grouped by the total pit stops of each driver from in race
     """
-    max_num = df['total_stops'].max()
-    _df_dict = {}
-    for i in range(1, max_num + 1):
-        _df_dict[i] = df[df['total_stops'] == i][['stop', 'positionOrder', 'lap_prop']]
-    return _df_dict
+    if by == 'pit_order':
+        max_num = df['total_stops'].max()
+        _df_dict = {}
+        for i in range(1, max_num + 1):
+            _df_dict[i] = df[df['total_stops'] == i][['stop', 'positionOrder', 'lap_prop']]
+        return _df_dict
+    elif by == 'total_stops':
+        pitstop_df = df[["raceId", "driverId", 'positionOrder', "total_stops"]]
+        _df_group = pitstop_df.groupby(["raceId", "driverId", 'positionOrder'], as_index=False)["total_stops"].count()
+        _df_group["positionOrder"] = _df_group["positionOrder"].astype(int)
+        _df_group.sort_values(by=["raceId", 'driverId'], inplace=True)
+        return _df_group
 
 
-# hypothesis 1
-# ...
+# hypothesis 1: pitstop_boxplot, stop_chart, analysis_of_variance
+def pitstop_boxplot(df: pd.DataFrame):
+    boxplot_base = df[["total_stops", "positionOrder"]]
+    boxplot = boxplot_base.boxplot(by="total_stops")
+    boxplot.plot()
+    plt.xlabel('Number of Pit Stops', fontsize='12')
+    plt.ylabel('Position', fontsize='12')
+    plt.title('Position Distribution by Pit Stops', fontsize='12')
+    plt.tight_layout()
+    plt.show()
+
+
+def stop_chart(df: pd.DataFrame, pit_stop: int, max_position: int):
+    df_filtered = df[df['positionOrder'] <= max_position]
+    for i in range(1, pit_stop + 1):
+        position_count = df_filtered[df_filtered['total_stops'] == i].groupby(['positionOrder'])[
+            "driverId"].count().reset_index(name='count')
+        position_count.sort_values(by=['positionOrder'], inplace=True)
+        position_count.plot.bar(x='positionOrder', y='count', fontsize='12')
+        plt.xticks(fontsize='12', rotation=1)
+        plt.xlabel('Position', fontsize='12', rotation=1)
+        plt.ylabel('Number of drivers', fontsize='12')
+        stop = "pit stop = " + str(i)
+        plt.title(stop, fontsize='12')
+        plt.show()
+
+
+def analysis_of_variance(df: pd.DataFrame):
+    print('H0: There is no significant difference in rank distribution between drivers taking a different number of '
+          'total pit stops.')
+    for i in range(1, 4):
+        if i <= 2:
+            filtered_df1 = df[df['total_stops'] == i]
+            filtered_df2 = df[df['total_stops'] == i + 1]
+            p_value = mannwhitneyu(filtered_df1['positionOrder'], filtered_df2['positionOrder']).pvalue
+            print('-' * 88)
+            print('P-value between {} pitstop and {} pitstop is {}'.format(i, i + 1, p_value))
+            if p_value > 0.05:
+                print("H0 cannot be rejected")
+            else:
+                print("Reject H0.", "There is a difference.")
+        if i == 3:
+            filtered_df1 = df[df['total_stops'] == i]
+            filtered_df2 = df[df['total_stops'] == i - 2]
+            p_value = mannwhitneyu(filtered_df1['positionOrder'], filtered_df2['positionOrder']).pvalue
+            print('-' * 88)
+            print('P-value between {} pitstop and {} pitstop is {}'.format(i, i - 2, p_value))
+            if p_value > 0.05:
+                print("H0 cannot be rejected")
+            else:
+                print("Reject H0.", "There is a difference.")
+
 
 # hypothesis 2: distribution_plot
 def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: bool = True, save_fig: bool = False):
@@ -153,7 +213,7 @@ def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: 
             df_std = round(df.std(), ndigits=3)
             # show mean line (x = mean)
             # even dividing point:
-            even_divide = (plot_count+1) / (ps_num + 1)
+            even_divide = (plot_count + 1) / (ps_num + 1)
             if show_mean:
                 plt.axvline(x=df_mean, color=color_bin2[plot_count], linewidth=4)
                 plt.axvline(x=even_divide, color='gold', linewidth=4)
@@ -262,7 +322,7 @@ def comparison_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], select_col='
         plt.show()
 
 
-def err_mean_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=False):
+def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=False):
     """
     Hypothesis 3 Function
     :param list_1: the list of dataframes with position order in the front
