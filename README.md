@@ -41,6 +41,8 @@ New General Research Topic:
 ## 2. Data Analysis
 ### 2.1. Pit Stop Strategy
 
+...
+
 #### 2.1.1. Hypothesis: Fewer pit stops give the driver a better rank in each race
 
 #### 2.1.2. Hypothesis: The pit stops are evenly distributed through time
@@ -120,7 +122,11 @@ Thus, we concluded that we accept the null hypothesis that the evenly distribute
  
 ### 2.2. Racing Speed Strategy
 
+...
+
 ### 2.3. Other Topics
+
+...
 
 ### 2.4. Results Summary
 
