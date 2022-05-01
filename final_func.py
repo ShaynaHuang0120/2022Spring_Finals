@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 from scipy.stats import ttest_1samp
 from scipy.stats import ttest_ind
+from scipy.stats import wilcoxon
 from scipy.stats import mannwhitneyu
 from sklearn.utils import resample
 
@@ -176,10 +177,12 @@ def analysis_of_variance(df: pd.DataFrame):
 
 
 # hypothesis 2: distribution_plot
-def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: bool = True, save_fig: bool = False):
+def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: bool = True, para_test=False,
+                      save_fig: bool = False):
     """
     Hypothesis 2 Function
     draw histograms for dataframes grouped by total pit stops number and the order of pit stop
+    :param para_test: if true, use parametric (T Test). if false (default), use non-parametric (Wilcoxon signed rank)
     :param _df_dict: the dictionary of dataframe, grouped using pit_stop_group
     :param show_mean: if true, show vertical lines of mean on the histograms
     :param show_description: if true, show distribution description
@@ -227,8 +230,13 @@ def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: 
                 perc_2 = round(100 * perc_2, ndigits=1)
                 print(f'    {perc_1}% within mean ± 1 std')
                 print(f'    {perc_2}% within mean ± 2 std')
-                t_test = ttest_1samp(a=df, popmean=even_divide)
-                print(f'     One sample T Test, mu={round(even_divide, ndigits=3)}, p value={t_test.pvalue}')
+                if para_test:
+                    _test = ttest_1samp(a=df, popmean=even_divide)
+                    print(f'     One sample T Test, mu={round(even_divide, ndigits=3)}, p value={_test.pvalue}')
+                else:
+                    _test = wilcoxon(df-even_divide)
+                    print(f'     One sample Wilcoxon Signed Rank Test, mu={round(even_divide, ndigits=3)}, '
+                          f'p value={_test.pvalue}')
         # save as picture
         plt.legend(loc="upper left")
         if save_fig: plt.savefig(f'image/hypo2/distribution_{ps_num}.png')
