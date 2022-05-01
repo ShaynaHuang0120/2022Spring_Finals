@@ -8,7 +8,7 @@ Group Members:
 
 Project Type: Type 1
 
-### Contents
+![](https://i.imgur.com/yph2Zcm.jpg)
 
 New General Research Topic:
 - What are factors that influence the F1 Racing rank?
@@ -16,16 +16,34 @@ New General Research Topic:
   - the time/speed for each lap 
   - Pit stop 
 
-1. Pit Stop Strategies
-   1. Hypothesis: Fewer pit stops give the driver a better rank in each race 
-   2. Hypothesis: The pit stops are evenly distributed 
-   3. Hypothesis: Evenly distributed pit stops give better race results
+### Contents
+1. Previous Work Review
+   1. Introduction
+   2. Critique
+   3. Improvements 
+2. Data Analysis
+   1. Pit Stop Strategy
+      1. Hypothesis: Fewer pit stops give the driver a better rank in each race 
+      2. Hypothesis: The pit stops are evenly distributed 
+      3. Hypothesis: Evenly distributed pit stops give better race results
+   2. Racing Speed Strategy
+      1. Hypothesis: 
+   3. Other Topics
+   4. Results Summary
+      1. Pit Stop Strategy
+      2. Racing Speed Strategy
+      3. Other Topics
 
-## 1. Pit Stop Strategies
+## 1. Previous Work Review
 
-### 1.1 Hypothesis: Fewer pit stops give the driver a better rank in each race
+...
 
-### 1.2 Hypothesis: The pit stops are evenly distributed through time
+## 2. Data Analysis
+### 2.1. Pit Stop Strategy
+
+#### 2.1.1. Hypothesis: Fewer pit stops give the driver a better rank in each race
+
+#### 2.1.2. Hypothesis: The pit stops are evenly distributed through time
 
 If we look at the distribution of the lap proportions of the pit stops, we can notice there seems to be a pattern. Here are what they look like in histograms.
 
@@ -44,10 +62,12 @@ However, the distribution statistics of these groups resemble the characteristic
 
 Assuming these groups of data are normally distributed, we notice that the means deviate quite a bit from the ideal dividing points (1/2, 1/3, 2/3, etc.). Using one sample T-Tests, we calculated the p values for each group, and the results show that all the p values are significantly lower than the significant level of 0.05, with differences of at least 20 orders of magnitude.
 
+If we exclude the normality assumption, and use Wilcoxon signed-rank tests, the one sample non-parametric mean comparison test, instead, we will get similar results, with the p values at least 20 orders of magnitude smaller.
+
 In conclusion, we reject the null hypothesis and determine that the time points of the pit-stopping are not evenly distributed.
 
 
-### 1.3 Hypothesis: Evenly distributed pit stops give better race results
+#### 2.1.3. Hypothesis: Evenly distributed pit stops give better race results
 
 To learn about the differences in the distributions of the pit stops of different position rankings, we first divide the dataset into two categories: high ranking and low ranking. The high ranking data are those with position order higher than 6, while the low ranking data are the rest, i.e. all the data below rank 5. To balance the cardinality of the two dataset, we resample the lower ranking data to the size of the high ranking data. And then, we plot them with histograms like we did for the Hypothesis 2, and here are what we got.
 
@@ -79,9 +99,11 @@ Similarly, we compare the results of higher ranking drivers with the lower ranki
 
 Thus, we concluded that we accept the null hypothesis that the evenly distributed pit stops give better racing results.
  
-## 2. Racing Speed Strategy
+## 2.2. Racing Speed Strategy
 
-## 3. Result Summary and Conclusions
+## 2.3. Other Topics
+
+## 2.4. Results Summary
 
 
 
