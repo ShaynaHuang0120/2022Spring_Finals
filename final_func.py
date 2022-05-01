@@ -231,7 +231,7 @@ def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: 
                 print(f'    {perc_2}% within mean ± 2 std')
                 _test = ttest_1samp(a=df, popmean=even_divide)
                 print(f'     One sample T Test, mu={round(even_divide, ndigits=3)}, p value={_test.pvalue}')
-                _test = wilcoxon(df-even_divide)
+                _test = wilcoxon(df - even_divide)
                 print(f'     One sample Wilcoxon Signed Rank Test, mu={round(even_divide, ndigits=3)}, '
                       f'p value={_test.pvalue}')
         # save as picture
@@ -362,14 +362,16 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
 
         sig_level = 0.05
         p_value = mannwhitneyu(_df_front, _df_back).pvalue
+        print(f'Total Pit Stops = {i + 1}')
         print(f'Mann-Whitney U rank test p value={p_value}')
 
         if p_value < sig_level:
-            print('     Mean of Average Deviations - ')
+            print('     Means of Average Deviation - ')
             print(f'        Higher Ranking: {_df_front_mean}, Lower Ranking: {_df_back_mean}')
             if _df_front_mean < _df_back_mean:
                 print('Higher ranking records have significantly lower mean deviations')
             else:
                 print('Lower ranking records have significantly lower mean deviations')
-        if save_fig: plt.savefig(f'image/hypo3/err_mean_{i}.png', transparent=False)
+        if save_fig:
+            plt.savefig(f'image/hypo3/err_mean_{i}.png', transparent=False)
         plt.show()
