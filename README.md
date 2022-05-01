@@ -102,7 +102,7 @@ The differences are statistically significant given the significance level of 0.
 
 ![](https://i.imgur.com/EiEiMJ1.png)
 
-We can use an alternative view of the data to measure the deviation, by using the average deviations of how far the lap proportions of all pit records from each driver from each race are away from the evenly divided points. 
+We can use an alternative view of the data to measure the deviation, by using the average deviations of how far the lap proportions of all pit records from each driver from each race are away from the evenly dividing points. 
 
 ![](https://i.imgur.com/S2IoesM.png)
 
@@ -118,11 +118,24 @@ Similarly, we compare the results of higher ranking drivers with the lower ranki
 
 Thus, we concluded that we accept the null hypothesis that the evenly distributed pit stops give better racing results.
  
-## 2.2. Racing Speed Strategy
+### 2.2. Racing Speed Strategy
 
-## 2.3. Other Topics
+### 2.3. Other Topics
 
-## 2.4. Results Summary
+### 2.4. Results Summary
+
+#### 2.4.1. Pit Stop Strategy
+
+According to the results of the hypothesis tests under the topic of pit-stopping, we learn that we accept all the null hypotheses except the second one. 
+
+We learned that the strategy of having fewer pit stops appears to have a positive effect on giving the driver a better rank in races. We suspect the reason behind this phenomenon is that the drivers who choose to pit fewer tend to have confidence in their equipment so that they think only one pit or two could be enough for the entire race. Conversely, their confidence could be from the quality and stability of their equipment, and, thus, the quality and stability lower the chances of accidents or equipment malfunctions. 
+
+We learned that the pit stops are not ideally evenly distributed throughout the races. Instead, it seems that the drivers tend to pit before arriving at the evenly dividing points. Such a shift in the distribution could be accounted for that the drivers will follow their pit-stopping plans and usually will only pit in advance when they think something goes wrong.
+
+We learned that the drivers who distribute the lap proportions of their pit stops evenly tend to have better race results. The better usage of equipment (tires, gasoline, ...) could be part of the contributing factor of such a phenomenon.
+
+
+
 
 
 
