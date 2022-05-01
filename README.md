@@ -45,7 +45,11 @@ New General Research Topic:
 
 #### 2.1.2. Hypothesis: The pit stops are evenly distributed through time
 
-If we look at the distribution of the lap proportions of the pit stops, we can notice there seems to be a pattern. Here are what they look like in histograms.
+Before we move on to the next hypothesis, let us introduce the concept we call 'Lap Proportion'. Lap proportion represents where or when the driver pit in a race, which we measure by dividing the number of laps the driver has already finished (*pit lap) by the total laps required to finish for that race.
+
+![](https://i.imgur.com/mxcMgDn.png)
+
+If we look at the distribution of the lap proportions of all the pit stop records, we can notice there seems to be a pattern. Here are what they look like in histograms.
 
 ![](https://i.imgur.com/WsPxIa7.png)
 ![](https://i.imgur.com/B3pgzDE.png)
@@ -55,11 +59,16 @@ As shown, for each number of pit stops a team chose for the entire race, there a
 
 Noticing this pattern, we came up with the second hypothesis that the pit stops are evenly distributed through time. Our null hypothesis is that all pits are normally distributed around the points the evenly dividing points (1/2, 1/3, 2/3, etc). 
 
-To study such a pattern, we calculated the proportion of the total laps the driver pit at for each record in the racing results. For convenience, we call this proportion 'Lap Proportion'.
-Before we start, there is one property of the Lap Proportion column that we should notice. The numeric range of the Lap Proportion is not ideally continuous. The range of values the Lap Proportion can take is actually a discrete set because the domains of values that the numerators and the denominators (i.e. laps and total laps) can only be chosen from two very limited sets. Due to the discrete nature of the data, the Lap Proportion data, grouped by any number of total pit stops, is not normally distributed by strict definition. 
+To study such a pattern, we calculated the Lap Proportions for each record in the racing results.
+There is one property of the Lap Proportion column that we should notice. The numeric range of the Lap Proportion is not ideally continuous. The range of values the Lap Proportion can take is actually a discrete set because the domains of values that the numerators and the denominators (i.e. laps and total laps) can only be chosen from two very limited sets. Due to the discrete nature of the data, the Lap Proportion data, grouped by any number of total pit stops, is not normally distributed by strict definition. 
 
 However, the distribution statistics of these groups resemble the characteristics of normal distributions very well: All the data groups are distributed symmetrically around the mean, with around 68% falling within one standard deviation, and with around 95% falling within two standard deviations. It would also be intuitive that such a distribution would follow a distribution similar to the normal distribution. Hence, we only assume that pit stop time points of each group are normally distributed given a broader definition. 
 
+Here are the statistics and p values we calculated for each data group. 
+![](https://i.imgur.com/GdxCG8P.png)
+![](https://i.imgur.com/RTMAeDZ.png)
+![](https://i.imgur.com/nhYVxf0.png
+)
 Assuming these groups of data are normally distributed, we notice that the means deviate quite a bit from the ideal dividing points (1/2, 1/3, 2/3, etc.). Using one sample T-Tests, we calculated the p values for each group, and the results show that all the p values are significantly lower than the significant level of 0.05, with differences of at least 20 orders of magnitude.
 
 If we exclude the normality assumption, and use Wilcoxon signed-rank tests, the one sample non-parametric mean comparison test, instead, we will get similar results, with the p values at least 20 orders of magnitude smaller.
