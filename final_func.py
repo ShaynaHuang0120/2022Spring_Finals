@@ -19,6 +19,36 @@ def merge_data(_df_list: List[pd.DataFrame]) -> pd.DataFrame:
     merges the dataframes according to their primary/foreign keys
     :param _df_list: list of dataframes to be merged
     :return: the merged dataframe
+
+    >>> d1 = {'df_Id': [1, 2], 'd1_col': [3, 4]}
+    >>> d2 = {'df_Id': [3, 2], 'd2_col': [8, 9]}
+    >>> df1 = pd.DataFrame(data=d1)
+    >>> df2 = pd.DataFrame(data=d2)
+    >>> merge_data([df1, df2])
+       df_Id  d1_col  d2_col
+    0      1       3     NaN
+    1      2       4     9.0
+    >>> d1 = {'df_Id': [1, 2], 'd1_col': [3, 4]}
+    >>> d2 = {'not_df_Id': [3, 2], 'd2_col': [8, 9]}
+    >>> df1 = pd.DataFrame(data=d1)
+    >>> df2 = pd.DataFrame(data=d2)
+    >>> merge_data([df1, df2])
+    Error: no common "id" columns found
+       df_Id  d1_col
+    0      1       3
+    1      2       4
+    >>> d1 = {'df_Id': [1, 2], 'd1_col': [3, 4]}
+    >>> d2 = {'df_Id': [3, 2], 'd2_col': [8, 9]}
+    >>> d3 = {'not_df_Id': [6, 6], 'd2_col': [6, 7]}
+    >>> df1 = pd.DataFrame(data=d1)
+    >>> df2 = pd.DataFrame(data=d2)
+    >>> df3 = pd.DataFrame(data=d3)
+    >>> merge_data([df1, df2, df3])
+    Error: no common "id" columns found
+       df_Id  d1_col  d2_col
+    0      1       3     NaN
+    1      2       4     9.0
+
     """
     # set up internal parameters
     suffixes = ['_1', '_2']
@@ -75,6 +105,26 @@ def process_data(mg_df: pd.DataFrame, normal_status=True, totals=True, deviation
     :param totals: if true, calculate the total laps, total stops and lap proportions
     :param deviation: if true, calculate the deviations and the relevant statistics
     :return: the processed dataframe
+
+    >>> test_df = pd.DataFrame({"raceId": [1]*5+[2]*4,\
+                   "driverId": [1,1,1,2,3,4,4,5,5],\
+                   "positionOrder": [1,1,1,2,3,1,1,5,5],\
+                   "stop": [1,2,3,1,1,1,2,1,2],\
+                   "lap": [2,5,8,5,5,3,6,3,6],\
+                   "laps": [20]*9,\
+                   "statusId": [1]*4+[2]+[1]*2+[11]*2})
+    >>> process_data(test_df)
+       raceId  driverId  positionOrder  ...  lap_prop  abs_deviation  abs_deviation_mean
+    0       1         1              1  ...      0.10       0.150000               0.250
+    1       1         1              1  ...      0.25       0.250000               0.250
+    2       1         1              1  ...      0.40       0.350000               0.250
+    3       1         2              2  ...      0.25       0.250000               0.250
+    4       2         4              1  ...      0.15       0.183333               0.275
+    5       2         4              1  ...      0.30       0.366667               0.275
+    6       2         5              5  ...      0.15       0.183333               0.275
+    7       2         5              5  ...      0.30       0.366667               0.275
+    <BLANKLINE>
+    [8 rows x 12 columns]
     """
     # 1. filtering normal status
     if normal_status:
@@ -108,6 +158,31 @@ def pit_stop_group(df: pd.DataFrame, by='pit_order'):
     :param by: group by what standard. 1. pit order (type a). 2. total pits (type b)
     :param df: the merged and processed dataframe
     :return: (type a): a dictionary with total pit numbers as keys and dataframe of records as values; (type b): a dataframe with positional info, grouped by the total pit stops of each driver from in race
+
+    >>> test_df = pd.DataFrame({"raceId": [1]*5+[2]*4,\
+                   "driverId": [1,1,1,2,3,4,4,5,5],\
+                   "positionOrder": [1,1,1,2,3,1,1,5,5],\
+                   "stop": [1,2,3,1,1,1,2,1,2],\
+                   "lap": [2,5,8,5,5,3,6,3,6],\
+                   "laps": [20]*9,\
+                   "statusId": [1]*4+[2]+[1]*2+[11]*2})
+    >>> test_df = process_data(test_df)
+    >>> pit_stop_group(test_df)
+    {1:    stop  positionOrder  lap_prop
+    3     1              2      0.25, 2:    stop  positionOrder  lap_prop
+    4     1              1      0.15
+    5     2              1      0.30
+    6     1              5      0.15
+    7     2              5      0.30, 3:    stop  positionOrder  lap_prop
+    0     1              1      0.10
+    1     2              1      0.25
+    2     3              1      0.40}
+    >>> pit_stop_group(test_df, by='total_stops')
+       raceId  driverId  positionOrder  total_stops
+    0       1         1              1            3
+    1       1         2              2            1
+    2       2         4              1            2
+    3       2         5              5            2
     """
     if by == 'pit_order':
         max_num = df['total_stops'].max()
@@ -187,6 +262,53 @@ def distribution_plot(_df_dict: dict, show_mean: bool = True, show_description: 
     :param show_description: if true, show distribution description
     :param save_fig: if true, save as picture
     :return: None. Plots the distribution
+
+    >>> df = pd.DataFrame({"raceId": [1]*5+[2]*4,\
+                   "driverId": [1,1,1,2,3,4,4,5,5],\
+                   "positionOrder": [1,1,1,2,3,1,1,5,5],\
+                   "stop": [1,2,3,1,1,1,2,1,2],\
+                   "lap": [2,5,8,5,5,3,6,3,6],\
+                   "laps": [20]*9,\
+                   "statusId": [1]*4+[2]+[1]*2+[11]*2})
+    >>> test_df = process_data(df)
+    >>> test_df_dict = pit_stop_group(test_df)
+    >>> distribution_plot(test_df_dict)
+    ----------------------------------------------------------------------------------------
+    Total Pit Stops:  1
+    No.  1  pit stop:  mean =  0.25  std =  nan
+        0.0% within mean ± 1 std
+        0.0% within mean ± 2 std
+         One sample T Test, mu=0.5, p value=nan
+         One sample Wilcoxon Signed Rank Test, mu=0.5, p value=1.0
+    ----------------------------------------------------------------------------------------
+    Total Pit Stops:  2
+    No.  1  pit stop:  mean =  0.15  std =  0.0
+        100.0% within mean ± 1 std
+        100.0% within mean ± 2 std
+         One sample T Test, mu=0.333, p value=0.0
+         One sample Wilcoxon Signed Rank Test, mu=0.333, p value=0.5
+    No.  2  pit stop:  mean =  0.3  std =  0.0
+        100.0% within mean ± 1 std
+        100.0% within mean ± 2 std
+         One sample T Test, mu=0.667, p value=0.0
+         One sample Wilcoxon Signed Rank Test, mu=0.667, p value=0.5
+    ----------------------------------------------------------------------------------------
+    Total Pit Stops:  3
+    No.  1  pit stop:  mean =  0.1  std =  nan
+        0.0% within mean ± 1 std
+        0.0% within mean ± 2 std
+         One sample T Test, mu=0.25, p value=nan
+         One sample Wilcoxon Signed Rank Test, mu=0.25, p value=1.0
+    No.  2  pit stop:  mean =  0.25  std =  nan
+        0.0% within mean ± 1 std
+        0.0% within mean ± 2 std
+         One sample T Test, mu=0.5, p value=nan
+         One sample Wilcoxon Signed Rank Test, mu=0.5, p value=1.0
+    No.  3  pit stop:  mean =  0.4  std =  nan
+        0.0% within mean ± 1 std
+        0.0% within mean ± 2 std
+         One sample T Test, mu=0.75, p value=nan
+         One sample Wilcoxon Signed Rank Test, mu=0.75, p value=1.0
     """
     # plot settings
     bins = np.linspace(0, 1, 50)
@@ -252,6 +374,43 @@ def front_back_division(mg_df: pd.DataFrame, select_col='lap_prop', max_pit=3, t
     :param top_num: the number (top 5) dividing the position orders as fronts and backs
     :return: the front list and the back list, in the form of:
     [<no.1 pit, total=1>, <no.1 pit, total=2>, <no.2 pit, total=2>, <no.1 pit, total=3>, ...]
+
+    >>> df = pd.DataFrame({"raceId": [1]*5+[2]*4,\
+                   "driverId": [1,1,1,2,3,4,4,5,5],\
+                   "positionOrder": [1,1,1,2,10,1,1,13,13],\
+                   "stop": [1,2,3,1,1,1,2,1,2],\
+                   "lap": [2,5,8,5,5,3,6,3,6],\
+                   "laps": [20]*9,\
+                   "statusId": [1]*4+[2]+[1]*2+[11]*2})
+    >>> test_df = process_data(df)
+    >>> front_back_division(test_df)
+    ([   stop  lap_prop
+    3     1      0.25,    stop  lap_prop
+    4     1      0.15,    stop  lap_prop
+    5     2       0.3,    stop  lap_prop
+    0     1       0.1,    stop  lap_prop
+    1     2      0.25,    stop  lap_prop
+    2     3       0.4], [Empty DataFrame
+    Columns: [stop, lap_prop]
+    Index: [],    stop  lap_prop
+    6     1      0.15,    stop  lap_prop
+    7     2       0.3, Empty DataFrame
+    Columns: [stop, lap_prop]
+    Index: [], Empty DataFrame
+    Columns: [stop, lap_prop]
+    Index: [], Empty DataFrame
+    Columns: [stop, lap_prop]
+    Index: []])
+    >>> front_back_division(test_df, select_col='abs_deviation_mean')
+    ([   total_stops  abs_deviation_mean
+    3            1                0.25,    total_stops  abs_deviation_mean
+    4            2               0.275,    total_stops  abs_deviation_mean
+    0            3                0.25], [Empty DataFrame
+    Columns: [total_stops, abs_deviation_mean]
+    Index: [],    total_stops  abs_deviation_mean
+    6            2               0.275, Empty DataFrame
+    Columns: [total_stops, abs_deviation_mean]
+    Index: []])
     """
     df_front = []
     df_back = []
@@ -287,6 +446,26 @@ def comparison_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], select_col='
     :param non_para: if true, use non-parametric test
     :param save_fig: if true, save as picture
     :return: None
+
+    >>> pit = pd.read_csv('data/pit_stops.csv')
+    >>> results = pd.read_csv('data/results.csv')
+    >>> status = pd.read_csv('data/status.csv')
+    >>> test_df = merge_data([pit, results, status])
+    >>> test_df = process_data(test_df)[:200]
+    >>> df_front, df_back = front_back_division(test_df)
+    >>> comparison_plot(df_front,df_back)
+    ----------------------------------------------------------------------------------------
+    Total Pits: 1, no.1 pit, p value=nan
+    ----------------------------------------------------------------------------------------
+    Total Pits: 2, no.1 pit, p value=0.5500522065849768
+    ----------------------------------------------------------------------------------------
+    Total Pits: 2, no.2 pit, p value=0.10989810168884662
+    ----------------------------------------------------------------------------------------
+    Total Pits: 3, no.1 pit, p value=0.843490486470722
+    ----------------------------------------------------------------------------------------
+    Total Pits: 3, no.2 pit, p value=0.15423974718402614
+    ----------------------------------------------------------------------------------------
+    Total Pits: 3, no.3 pit, p value=0.3097817821496505
     """
     bins = np.linspace(0, 1, 50)
     color_bin = ['tab:blue', 'tab:orange', 'tab:red']
@@ -334,6 +513,14 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
     :param list_2: the list of dataframes with position order in the back
     :param save_fig: if true, save as picture
     :return: None
+
+    >>> pit = pd.read_csv('data/pit_stops.csv')
+    >>> results = pd.read_csv('data/results.csv')
+    >>> status = pd.read_csv('data/status.csv')
+    >>> test_df = merge_data([pit, results, status])
+    >>> test_df = process_data(test_df)[:200]
+    >>> df_front, df_back = front_back_division(test_df, select_col='abs_deviation_mean')
+    >>> avg_deviation_plot(df_front,df_back)
     """
     bins = np.linspace(0, 1, 50)
     color_bin = ['tab:blue', 'tab:orange', 'tab:red']
@@ -375,3 +562,37 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
         if save_fig:
             plt.savefig(f'image/hypo3/err_mean_{i}.png', transparent=False)
         plt.show()
+
+
+if __name__ == '__main__':
+    # Load data
+    pit = pd.read_csv('data/pit_stops.csv')
+    results = pd.read_csv('data/results.csv')
+    status = pd.read_csv('data/status.csv')
+    # Process the data files
+    merge_df = merge_data([pit, results, status])
+    merge_df = process_data(merge_df)
+    df_dict = pit_stop_group(merge_df)
+    # Hypothesis 1
+    df_group = pit_stop_group(merge_df, by='total_stops')
+    pitstop_boxplot(df_group)
+    stop_chart(df_group, 3, 22)
+    analysis_of_variance(df_group)
+    # Hypothesis 2
+    distribution_plot(df_dict)
+    # Hypothesis 3
+    df_front, df_back = front_back_division(merge_df, top_num=5)
+    comparison_plot(df_front, df_back)
+    df_front, df_back = front_back_division(merge_df, select_col='abs_deviation_mean', top_num=5)
+    avg_deviation_plot(df_front, df_back)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
