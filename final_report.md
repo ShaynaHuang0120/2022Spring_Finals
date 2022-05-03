@@ -1,6 +1,6 @@
-#Topic: Racing Strategies of Formula One
+# Topic: Racing Strategies of Formula One
 
-##Background
+## Background
 Cited from
 "Formula 1 (a.k.a. F1 or Formula One) is the highest class of single-seater auto racing sanctioned by the Fédération Internationale de l'Automobile (FIA) and owned by the Formula One Group. The FIA Formula One World Championship has been one of the premier forms of racing around the world since its inaugural season in 1950. The word "formula" in the name refers to the set of rules to which all participants' cars must conform. A Formula One season consists of a series of races, known as Grands Prix, which take place worldwide on purpose-built circuits and on public roads."
 
@@ -8,8 +8,8 @@ Cited from
 1. Original Work Review
    1. Introduction
    2. Critique
-   3. Improvements 
-2. Data Analysis
+   3. Improvement Description 
+2. Data Analytics of Racing Strategies of Formula One
    1. Pit Stop Strategy
       1. Hypothesis: Fewer pit stops give the driver a better rank in each race 
       2. Hypothesis: The pit stops are evenly distributed 
@@ -29,20 +29,55 @@ Data Source: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championsh
 
 The dataset include 14 csv files for all the relevant information of F1 racing including cir
 #### 1.1.2 Original work Description
+Original Work GitHub Link: https://github.com/ho-yi-shiuan/2021_Spring_finals
+
+In their project, the authors analyzed the strategy of pit stops on race results of Formula One (F1). They proposed two hypotheses. The first one was "Less pit stops gives the driver better rank in each race."
+And the second was Laps of each pit stop time should be similar for better tire usage.
+
+In their first hypothesis, they created the boxplot and bar charts showing the distribution of positions based on the total number of pit stops.
+They concluded that there was no strong relationship between pit stop counts and positions since the distribution did not change
+the pit stop changed.
+
+Second, they had several line charts showing the relationship between the proportion of total laps and race count. The results demonstrated that
+most of the pit stop timing was average and thus stated that they didn't have strong evidence to reject the second hypothesis
 
 ### 1.2 Critique of The Original Work
 #### 1.2.1 Hypotheses
+Their results didn't align with their graphic for the first hypothesis, as distributions changed when the pit stop number varied. Potential patterns appeared in their bar charts which we will investigate more.
+They also did not have any further substantial statistical methods to support their results further. 
+
+The second hypothesis was very unclear and confusing in general. 
+Through the analysis, there was no information regarding the tire usage. 
+Also, they failed to analyze the time pattern in the different number of pit stops as we discovered that the proportions of total laps could have potential effects on the race results. This hypothesis was not consistent with their topic as well.
+
 #### 1.2.2 Coding
-#### 1.2.3 Documentation
+We identified three major issues in their coding part. First, they had poor documentation since they missed end-user instruction, preventing any reviewer from understanding
+their whole project and code quickly and easily. Their docstrings were also low-quality. Many were short sentences and did not clearly reveal the actual goals and steps.
 
-### 1.3 Improvements
+The authors also included redundant and necessary functions, such as read_data and delete_data. They merely utilized built-in functions in Pandas library without any additional code to improve the functionality.
+
+Moreover, the whole coding part had low modularity. In detail, their "main function" part had many lines of unorganized code, even a for loop to plot the charts. Such a hard-core style significantly reduced the reusability and lowered the efficiency.
+
+### 1.3 Improvement Description
+
+Our goals in this project includes two main parts and improvements:
+- Analysis
+  - Correct and improve existing hypotheses
+  - Propose new hypotheses based on the existing dataset
+  - Propose new topic and additional hypotheses on additional dataset & data source
+  - Introduce statistical testing (Mann-Whitney U, T test)
+  - Readme file
+  
+
+- Code Implementation
+  - Comprehensive docstrings and doctests 
+  - High Modularity and usability
+  - Efficiency techniques 
+
+  
 
 
-
-
-
-
-## 2. Data Analysis
+## 2. Data Analytics of Racing Strategies of Formula One
 ### 2.1. Pit Stop Strategy
 
 ...
