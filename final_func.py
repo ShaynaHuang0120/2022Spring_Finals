@@ -197,9 +197,29 @@ def pit_stop_group(df: pd.DataFrame, by='pit_order'):
         _df_group.sort_values(by=["raceId", 'driverId'], inplace=True)
         return _df_group
 
+def pit_stop_group_by_driver(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    this function used to calculate the number of pitstop for each driver per race
+    :param df: dataframe that need to find the total pit stop rows
+    :return: dataframe shows the total number of pit stop of each driver and race
+    >>> df = pd.DataFrame({"raceId":[1,1,1],"driverId":[1,1,1],'positionOrder':[2,2,2], "total_stops":[1,2,3]})
+    >>> pit_stop_group_by_driver(df)
+       raceId  driverId  positionOrder  total_stops
+    0       1         1              2            3
+    """
+    pitstop_df = df[["raceId", "driverId",'positionOrder', "total_stops"]]
+    pitstop_groupby = pitstop_df.groupby(["raceId","driverId",'positionOrder'], as_index=False)["total_stops"].count()
+    pitstop_groupby["positionOrder"] = pitstop_groupby["positionOrder"].astype(int)
+    pitstop_groupby.sort_values(by=["raceId", 'driverId'], inplace=True)
+    return (pitstop_groupby)
 
 # hypothesis 1: pitstop_boxplot, stop_chart, analysis_of_variance
 def pitstop_boxplot(df: pd.DataFrame):
+    """
+    this function used to create the boxplot which shows the race result of different amount of pit stop
+    :param df: the dataframe grouped by driver and race
+    :return: boxplot shows the race result of different amount of pit stop
+    """
     boxplot_base = df[["total_stops", "positionOrder"]]
     boxplot = boxplot_base.boxplot(by="total_stops")
     boxplot.plot()
@@ -211,6 +231,13 @@ def pitstop_boxplot(df: pd.DataFrame):
 
 
 def stop_chart(df: pd.DataFrame, pit_stop: int, max_position: int):
+    """
+    this function used to create bar chart which shows the number of drivers per position
+    :param df: the dataframe grouped by driver and race
+    :param pit_stop: number of pit stop the chart consider
+    :param max_position: the maximum rank the chart show
+    :return: bar chart shows the count of positions when taking 1, 2 or 3 pit stops
+    """
     df_filtered = df[df['positionOrder'] <= max_position]
     for i in range(1, pit_stop + 1):
         position_count = df_filtered[df_filtered['total_stops'] == i].groupby(['positionOrder'])[
@@ -226,6 +253,24 @@ def stop_chart(df: pd.DataFrame, pit_stop: int, max_position: int):
 
 
 def analysis_of_variance(df: pd.DataFrame):
+    """
+    this function used to calculate the P-value of rank distribution when taking 1, 2 or 3 pit stops and check whether there is significant difference in rank distribution.
+    :param df: the dataframe grouped by driver and race
+    :return: the test result
+    >>> df = pd.DataFrame({"raceId":[1,2,2,4,6,7,3,3],"driverId":[1,2,3,4,5,6,7,1],'positionOrder':[3,4,5,1,2,2,1,3], "total_stops":[3,2,3,1,2,3,1,2]})
+    >>> analysis_of_variance(df)
+    H0: There is no significant difference in rank distribution between drivers taking a different number of total pit stops.
+    ----------------------------------------------------------------------------------------
+    P-value between 1 pitstop and 2 pitstop is 0.1386406338132186
+    H0 cannot be rejected
+    ----------------------------------------------------------------------------------------
+    P-value between 2 pitstop and 3 pitstop is 1.0
+    H0 cannot be rejected
+    ----------------------------------------------------------------------------------------
+    P-value between 3 pitstop and 1 pitstop is 0.1386406338132186
+    H0 cannot be rejected
+
+    """
     print('H0: There is no significant difference in rank distribution between drivers taking a different number of '
           'total pit stops.')
     for i in range(1, 4):
@@ -574,7 +619,7 @@ if __name__ == '__main__':
     merge_df = process_data(merge_df)
     df_dict = pit_stop_group(merge_df)
     # Hypothesis 1
-    df_group = pit_stop_group(merge_df, by='total_stops')
+    df_group = pit_stop_group_by_driver(merge_df)
     pitstop_boxplot(df_group)
     stop_chart(df_group, 3, 22)
     analysis_of_variance(df_group)

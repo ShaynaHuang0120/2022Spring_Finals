@@ -56,8 +56,6 @@ def pitstop_boxplot(df_a, df_b):
     this function used to create the boxplot which shows the race result of different amount of pit stop
     :param df_a: table to join
     :param df_b: table to join
-    :param merge_key: tables are joined based on merge_key
-    :param boxplot_data: data used for boxplot
     :return: boxplot shows the race result of different amount of pit stop
     """
     joined_table = df_a.merge(df_b, on=["raceId", "driverId"])
