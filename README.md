@@ -1,5 +1,6 @@
 # IS 597 Final Project Spring 2022 
 # Data Analysis of Formula One Racing Strategy
+
 ![](https://i.imgur.com/yph2Zcm.jpg)
 
 ##  Team Members
@@ -10,19 +11,21 @@ Group Members:
 3. Ching-Yun Huang (ShaynaHuang0120)
 
 ## Project Overview: 
-Type: 1 - Specifics for a Formal Critique and Improvement of a Published Data Analysis:
+Type: 1 - Formal Critique and Improvement of a Published Data Analysis:
 
 In this project, we utilized one of the previous final projects in IS 597PR as the starting point. We found that the original 
-work had problems with coding, corresponding analyses, and many other types of issues. Besides revising and improving the original work,
+work had problems with coding, corresponding analyses, and many other types of issues. Besides, revising and improving the original work,
 we also developed our own new hypotheses and analyses on the new dataset and data source, making the original topic a broader one.
 
 ## Repository Overview & Instructions
 ### Folders:
-- Data: All the datasets we apply through all python file and Jupiter Notebooks
+- data: All the datasets we apply through all python file and Jupiter Notebooks
+- image: All the pictures generated and shown in the Jupiter Notebooks
 - Presentation： The PowerPoint file (slides) used for the final presentation
-- .idea:
 - archive:
-- image: All the pictures shown in the Jupiter Notebooks
+- .idea:
+
+
 
 ### Files in main:
 - README.md: Overview of the project and the end-user instructions
