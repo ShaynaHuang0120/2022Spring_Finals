@@ -28,8 +28,14 @@ Cited from
 Data Source: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
 
 The dataset include 14 csv files for all the relevant information of F1 racing including cir
-#### 1.1.2 Original work
+#### 1.1.2 Original work Description
 
+### 1.2 Critique of The Original Work
+#### 1.2.1 Hypotheses
+#### 1.2.2 Coding
+#### 1.2.3 Documentation
+
+### 1.3 Improvements
 
 
 

@@ -39,14 +39,6 @@ conclusion in sequence.
 
 
 
-
-
-New General Research Topic:
-- What are factors that influence the F1 Racing rank?
-  - Car constructors
-  - the time/speed for each lap 
-  - Pit stop 
-
 ### Contents
 1. Previous Work Review
    1. Introduction
