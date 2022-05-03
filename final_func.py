@@ -605,7 +605,7 @@ if __name__ == '__main__':
     merge_df = process_data(merge_df)
     df_dict = pit_stop_group(merge_df)
     # Hypothesis 1
-    df_group = pit_stop_group_by_driver(merge_df)
+    df_group = pit_stop_group(merge_df, by='total_stops')
     pitstop_boxplot(df_group)
     stop_chart(df_group, 3, 22)
     analysis_of_variance(df_group)
