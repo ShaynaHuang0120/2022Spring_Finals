@@ -27,7 +27,7 @@ Cited from
 #### 1.1.1 Original Dataset
 Data Source: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
 
-The dataset include 14 csv files for all the relevant information of F1 racing including cir
+The dataset include 14 csv files for all the relevant information of F1 racing including circuits, drivers, races, results, lap times, pit stops, qualifying, championships, and constructors.
 #### 1.1.2 Original work Description
 Original Work GitHub Link: https://github.com/ho-yi-shiuan/2021_Spring_finals
 
