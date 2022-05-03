@@ -1,54 +1,11 @@
-# IS 597 Final Project Spring 2022 
-# Data Analysis of Formula One Racing Strategy
-![](https://i.imgur.com/yph2Zcm.jpg)
+#Topic: Racing Strategies of Formula One
 
-##  Team Members
+##Background
+Cited from
+"Formula 1 (a.k.a. F1 or Formula One) is the highest class of single-seater auto racing sanctioned by the Fédération Internationale de l'Automobile (FIA) and owned by the Formula One Group. The FIA Formula One World Championship has been one of the premier forms of racing around the world since its inaugural season in 1950. The word "formula" in the name refers to the set of rules to which all participants' cars must conform. A Formula One season consists of a series of races, known as Grands Prix, which take place worldwide on purpose-built circuits and on public roads."
 
-Group Members:
-1. Andrew Mo (andrewmo1002)
-2. Tianci Zheng (DylanZheng)
-3. Ching-Yun Huang (ShaynaHuang0120)
-
-## Project Overview: 
-Type: 1 - Specifics for a Formal Critique and Improvement of a Published Data Analysis:
-
-In this project, we utilized one of the previous final projects in IS 597PR as the starting point. We found that the original 
-work had problems with coding, corresponding analyses, and many other types of issues. Besides revising and improving the original work,
-we also developed our own new hypotheses and analyses on the new dataset and data source, making the original topic a broader one.
-
-## Repository Overview & Instructions
-### Folders:
-- Data: All the datasets we apply through all python file and Jupiter Notebooks
-- Presentation： The PowerPoint file (slides) used for the final presentation
-- .idea:
-- archive:
-- image: All the pictures shown in the Jupiter Notebooks
-
-### Files in main:
-- README.md: Overview of the project and the end-user instructions
-- final_func.py: Functions used for data analytic and visualization
-- hypothesis 1- 4: Jupiter Notebooks to illustrate each hypothesis' code
-- Comprehensive_analysis: A Jupiter Notebook to describe all of our research and findings
-- xxxx:
-
-### End-user Instruction
-- Each hypothesis Jupiter Notebook presents the coding part and the output
-- To view our results as a whole, please read the comprehensive_analysis in which we presented all of our analyses, visualizations,
-conclusion in sequence.
-- To view our coding part, Jupiter Notebooks can be a starting point and all functions used in notebooks are stored in final_func.py
-
-
-
-
-
-New General Research Topic:
-- What are factors that influence the F1 Racing rank?
-  - Car constructors
-  - the time/speed for each lap 
-  - Pit stop 
-
-### Contents
-1. Previous Work Review
+## Contents
+1. Original Work Review
    1. Introduction
    2. Critique
    3. Improvements 
@@ -65,9 +22,19 @@ New General Research Topic:
       2. Racing Speed Strategy
       3. Other Topics
 
-## 1. Previous Work Review
+## 1. Original Work Review
+### 1.1 Original Work Introduction
+#### 1.1.1 Original Dataset
+Data Source: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
 
-...
+The dataset include 14 csv files for all the relevant information of F1 racing including cir
+#### 1.1.2 Original work
+
+
+
+
+
+
 
 ## 2. Data Analysis
 ### 2.1. Pit Stop Strategy
