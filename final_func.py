@@ -154,7 +154,8 @@ def process_data(mg_df: pd.DataFrame, normal_status=True, totals=True, deviation
 
 def pit_stop_group(df: pd.DataFrame, by='pit_order'):
     """
-    group the records by the total number of pit stops of each racing record
+    1. by = 'pit_order': group the records by the total number of pit stops of each racing record
+    2. by = 'total_stops': calculate the total number of pitstop for each driver per race
     :param by: group by what standard. 1. pit order (type a). 2. total pits (type b)
     :param df: the merged and processed dataframe
     :return: (type a): a dictionary with total pit numbers as keys and dataframe of records as values; (type b): a dataframe with positional info, grouped by the total pit stops of each driver from in race
@@ -197,21 +198,6 @@ def pit_stop_group(df: pd.DataFrame, by='pit_order'):
         _df_group.sort_values(by=["raceId", 'driverId'], inplace=True)
         return _df_group
 
-def pit_stop_group_by_driver(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    this function used to calculate the number of pitstop for each driver per race
-    :param df: dataframe that need to find the total pit stop rows
-    :return: dataframe shows the total number of pit stop of each driver and race
-    >>> df = pd.DataFrame({"raceId":[1,1,1],"driverId":[1,1,1],'positionOrder':[2,2,2], "total_stops":[1,2,3]})
-    >>> pit_stop_group_by_driver(df)
-       raceId  driverId  positionOrder  total_stops
-    0       1         1              2            3
-    """
-    pitstop_df = df[["raceId", "driverId",'positionOrder', "total_stops"]]
-    pitstop_groupby = pitstop_df.groupby(["raceId","driverId",'positionOrder'], as_index=False)["total_stops"].count()
-    pitstop_groupby["positionOrder"] = pitstop_groupby["positionOrder"].astype(int)
-    pitstop_groupby.sort_values(by=["raceId", 'driverId'], inplace=True)
-    return (pitstop_groupby)
 
 # hypothesis 1: pitstop_boxplot, stop_chart, analysis_of_variance
 def pitstop_boxplot(df: pd.DataFrame):
@@ -630,14 +616,3 @@ if __name__ == '__main__':
     comparison_plot(df_front, df_back)
     df_front, df_back = front_back_division(merge_df, select_col='abs_deviation_mean', top_num=5)
     avg_deviation_plot(df_front, df_back)
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
