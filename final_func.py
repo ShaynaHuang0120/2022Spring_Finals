@@ -205,7 +205,7 @@ def lap_data_process(df: pd.DataFrame, lap_df:pd.DataFrame)-> pd.DataFrame:
     :param lap_df: lap data to margin
     :return: the standard deviation of time spent on laps for each driver in a race
     >>> test_df = pd.DataFrame({"raceId": [1]*8,"driverId": [1]*5+[2]*3,"positionOrder": [1]*5+[2]*3})
-    >>> test_lap_df = pd.DataFrame({"raceId":[1]*8,"driverId":[1]*5+[2]*3,"time":['1:38.109','5:33.006','4:32.713','1:32.803','2:22.547','3:21.308','2:26.446','1:32.605']})
+    >>> test_lap_df = pd.DataFrame({"raceId":[1]*8,"driverId":[1]*5+[2]*3,"time":['1:38.109','5:33.006','4:32.713:3','1:32.803','2:22.547','3:21.308','2:26.446','1:32.605']})
     >>> lap_data_process(test_df, test_lap_df)
        raceId  driverId  positionOrder  lap_time_STD
     0       1         1              1     99.385333
@@ -217,7 +217,7 @@ def lap_data_process(df: pd.DataFrame, lap_df:pd.DataFrame)-> pd.DataFrame:
     joined_table["time"]= joined_table["time"].str.split(':')
 
     # new df from the column of lists
-    split_df = pd.DataFrame(joined_table["time"].tolist(), columns=['lap_minutes', 'lap_seconds'])
+    split_df = pd.DataFrame(joined_table["time"].tolist(), columns=['lap_minutes', 'lap_seconds','none'])
     # concat df and split_df
     joined_table = pd.concat([joined_table, split_df], axis=1)
     joined_table["positionOrder"] = joined_table["positionOrder"] .astype(int)
@@ -227,7 +227,7 @@ def lap_data_process(df: pd.DataFrame, lap_df:pd.DataFrame)-> pd.DataFrame:
     #since most of the time spend for each lap is below 5 minutes, we assumed that the time spent greater than 5 minutes should be caused by accidents rather than strategy. Thus, we focus on lap with time spend less than 6 minutes.
     li=[1,2,3,4,5]
     df_filtered = joined_table[joined_table['lap_minutes'].isin(li)]
-    df_filtered["lap_time"] = " "
+    df_filtered = df_filtered.assign(lap_time='')
     sec = []
     for time_list in df_filtered["time"]:
         if time_list[0] == "1":
@@ -710,6 +710,15 @@ def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
     else:
         print("H0 cannot be rejected")
 
+def barchart_lapspeed(df: pd.DataFrame) -> plt:
+    df2 = df.groupby(['positionOrder'], as_index=False)["lap_time_STD"].mean()
+    df2.plot.bar(x='positionOrder', y='lap_time_STD', fontsize='9',alpha=0.7,color = ['tab:blue'])
+    plt.xlabel('Position', fontsize='12', rotation=1)
+    plt.ylabel('Mean of lap time STD', fontsize='12')
+    plt.xticks(rotation=1)
+    plt.title('Distribution of lap time by rank', fontsize='12')
+    plt.show()
+
 if __name__ == '__main__':
     # Load data
     pit = pd.read_csv('data/pit_stops.csv')
@@ -735,3 +744,4 @@ if __name__ == '__main__':
     avg_deviation_plot(df_front, df_back)
     # Hypothesis 4
     rank_df_plt(lap_df)
+    barchart_lapspeed(lap_df)
