@@ -648,6 +648,19 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
 
 #hypothesis 4
 def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
+    """
+
+    :param df:
+    :param threshold:
+    :return:
+    >>> test_df = pd.DataFrame({"raceId": [1]*8,"driverId": [1,2,3,4,5,6,7,8],"positionOrder": [1,2,3,4,5,6,7,8],"lap_time_STD":[2,5,1,3,4,2,3,6]})
+    >>> rank_df_plt(test_df)
+    H0: There is no significant difference in standard deviation of time spent on laps between drivers with high ranking and drivers with low ranking.
+    ----------------------------------------------------------------------------------------
+    P-value between high ranking drivers and low ranking drivers is 0.46512378882022054.
+    ----------------------------------------------------------------------------------------
+    H0 cannot be rejected
+    """
     print('H0: There is no significant difference in standard deviation of time spent on laps between drivers with high ranking and drivers with low ranking.')
     rank_list = []
     gap_list =[]
@@ -713,6 +726,14 @@ def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
         print("H0 cannot be rejected")
 
 def barchart_lapspeed(df: pd.DataFrame) -> plt:
+    """
+
+    :param df:
+    :return:
+    >>> test_df = pd.DataFrame({"raceId": [1]*2,"driverId": [1,2],"positionOrder": [1,2],"lap_time_STD":[2,5]})
+    >>> barchart_lapspeed(test_df)
+    """
+
     df2 = df.groupby(['positionOrder'], as_index=False)["lap_time_STD"].mean()
     df2.plot.bar(x='positionOrder', y='lap_time_STD', fontsize='9',alpha=0.7,color = ['tab:blue'])
     plt.xlabel('Position', fontsize='12', rotation=1)
