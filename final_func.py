@@ -704,7 +704,9 @@ def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
     plt.xlabel('Lap time STD')
     plt.show
     pvalue= mannwhitneyu(df[df['rank'] == "High Rank"]['lap_time_STD'], df[df['rank'] == "Low Rank"]['lap_time_STD']).pvalue
+    print('-' * 88)
     print('P-value between high ranking drivers and low ranking drivers is {}.'.format(pvalue))
+    print('-' * 88)
     if pvalue < threshold:
         print("Reject H0.", "There is a difference.")
     else:
