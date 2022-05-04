@@ -45,6 +45,11 @@ we also developed our own new hypotheses and analyses on the new dataset and dat
 5. Report
    - Final Report.md
    
+### User Instructions:
+- Each hypothesis Jupiter Notebook presents the coding part and the output
+- To view our results as a whole, please read the final_report in which we presented all of our analyses, visualizations, and
+conclusions in sequence.
+- To view our coding part, Jupiter Notebooks can be a starting point and all functions used in notebooks are stored in final_func.py
 
 
 

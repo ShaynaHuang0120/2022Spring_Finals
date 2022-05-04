@@ -5,9 +5,18 @@ Formula 1 (a.k.a. F1 or Formula One) is one of the most popular car racing compe
 de l'Automobile (FIA) and is owned by the Formula One Group. 
 One of the fascinating components in F1 is the pit stop in which the players stop the car to perform maintenance such as tire replacement and fuel refilling within seconds. Thus, how to wisely utilize pit stops has become one popular topic in F1. And the authors of the previous project and we decided to focus on the strategies of F1 like pit stops distribution and eventually the effect on the ranking.
 
-## Relevant Term Definition
-- Pit stop: The stop point for drivers to pull over and get their car maintenanced
-- Lap time: The time for a car to run one round of the total laps
+## Glossary
+- Pit stop
+  - In motorsports, a pit stop is a pause for refuelling, new tyres, repairs, mechanical adjustments, a driver change, as a penalty, or any combination of the above. These stops occur in an area called the pits, most commonly accessed via a pit lane which runs parallel to the start/finish straightaway of the track and is connected to it at each end.
+- Pit
+  - (verb) To pause in the pit lane to do the pit stop things.
+- Pit-Stopping Strategy
+  - All drivers will pit at least once in each race. 
+  - Each driver has their own strategy in
+    - choosing the total number of pit stops in each race
+    - choosing when to pit 
+- Lap time
+  - The time recorded for a driver to run one entire lap
 
 
 ## Contents
