@@ -5,7 +5,7 @@ Formula 1 (a.k.a. F1 or Formula One) is one of the most popular car racing compe
 de l'Automobile (FIA) and is owned by the Formula One Group. 
 One of the fascinating components in F1 is the pit stop in which the players stop the car to perform maintenance such as tire replacement and fuel refilling within seconds. Thus, how to wisely utilize pit stops has become one popular topic in F1. And the authors of the previous project and we decided to focus on the strategies of F1 like pit stops distribution and eventually the effect on the ranking.
 
-## Relavent Term Definition
+## Relevant Term Definition
 - Pit stop: The stop point for drivers to pull over and get their car maintenanced
 - Lap time: The time for a car to run one round of the total laps
 
