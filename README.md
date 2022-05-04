@@ -20,27 +20,31 @@ we also developed our own new hypotheses and analyses on the new dataset and dat
 
 ## Repository Description & Instruction
 ### Folders:
-- data: Datasets we apply through all python file and Jupiter Notebooks
-- image: All the pictures generated and shown in the Jupiter Notebooks
-- presentation: The PowerPoint file (slides) used for the final presentation
-- efficiency: folder for efficiency method (Cython) related files
+- data
+  - Our datasets
+- image
+  - All the pictures generated and shown
+- efficiency
+  - The folder for efficiency related files (Cython)
+- Presentation
+  - The final presentation slides
 
-### Files in main:
-- README.md: Overview of the project and the end-user instructions
-- Hypothesis - xxx.ipynb: Jupiter Notebooks to illustrate each hypothesis' code
-- EDA - Constructor and Groups.ipynb: A Jupiter Notebook analyzing the car constructors and groups in F1 and Formula E.
-- final_report.md: A comprehensive report to describe all of our research and findings
-- final_func.py: Functions used for data analytic and visualization
-- Efficiency Techniques Application.ipynb: A Jupyter Notebook comparing the running speed with & without using Cython Optimizations
-
-### User Instruction
-- Each hypothesis Jupiter Notebook presents the coding part and the output
-- To view our results as a whole, please read the final_report in which we presented all of our analyses, visualizations, and
-conclusions in sequence.
-- To view our coding part, Jupiter Notebooks can be a starting point and all functions used in notebooks are stored in final_func.py
-
-
-
+### Root Directory Files:
+1. Overview
+   - README.md
+2. Major Function Module
+   - final_func.py
+3. Calculation & Visualization
+   1. Hypotheses
+      - Hypothesis - Pit Stops.ipynb
+      - Hypothesis - Racing Speed.ipynb
+   2. Exploratory Data Analysis
+      - EDA - Constructor and Groups.ipynb
+4. Python Efficiency Technique
+   - Efficiency Techniques Application.ipynb
+5. Report
+   - Final Report.md
+   
 
 
 
