@@ -4,6 +4,15 @@
 Formula 1 (a.k.a. F1 or Formula One) is one of the most popular car racing competitions, receiving lots of attention and participation from worldwide car manufacturers and players. Being the highest class of single-seater auto racing, F1 is sanctioned by the Fédération Internationale 
 de l'Automobile (FIA) and is owned by the Formula One Group. 
 One of the fascinating components in F1 is the pit stop in which the players stop the car to perform maintenance such as tire replacement and fuel refilling within seconds. Thus, how to wisely utilize pit stops has become one popular topic in F1. And the authors of the previous project and we decided to focus on the strategies of F1 like pit stops distribution and eventually the effect on the ranking.
+
+## Relavent Term Definition
+- Pit stop: 
+- Lap time:
+
+
+
+
+
 ## Contents
 1. Original Work Review
    1. Introduction
@@ -16,7 +25,7 @@ One of the fascinating components in F1 is the pit stop in which the players sto
       3. Hypothesis: Evenly distributed pit stops give better race results
    2. Racing Speed Strategy
       1. Hypothesis: 
-   3. Other Topics
+   3. Exploratory Analysis on Car Constructors and Groups
    4. Results Summary
       1. Pit Stop Strategy
       2. Racing Speed Strategy
