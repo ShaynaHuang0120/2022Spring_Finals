@@ -12,13 +12,13 @@ Group Members:
 
 
 ## Project Overview: 
-Type: 1 - Formal Critique and Improvement of a Published Data Analysis:
+Type 1 - Formal Critique and Improvement of a Published Data Analysis:
 
 In this project, we utilized one of the previous final projects in IS 597PR as the starting point. We found that the original 
 work had problems with coding, corresponding analyses, and many other types of issues. Besides, revising and improving the original work,
 we also developed our own new hypotheses and analyses on the new dataset and data source, making the original topic a broader one.
 
-## Repository Description & Instruction
+## Repository
 ### Folders:
 - data
   - Our datasets
