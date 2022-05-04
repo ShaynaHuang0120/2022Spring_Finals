@@ -35,7 +35,7 @@ we also developed our own new hypotheses and analyses on the new dataset and dat
 2. Major Function Module
    - final_func.py
 3. Calculation & Visualization
-   1. Hypotheses
+   1. Hypothesis Tests Implementation
       - Hypothesis - Pit Stops.ipynb
       - Hypothesis - Racing Speed.ipynb
    2. Exploratory Data Analysis
