@@ -7,8 +7,9 @@
 
 Group Members:
 1. Andrew Mo (andrewmo1002)
-2. Tianci Zheng (DylanZheng)
-3. Ching-Yun Huang (ShaynaHuang0120)
+2. Ching-Yun Huang (ShaynaHuang0120)
+3. Tianci Zheng (DylanZheng)
+
 
 ## Project Overview: 
 Type: 1 - Formal Critique and Improvement of a Published Data Analysis:
