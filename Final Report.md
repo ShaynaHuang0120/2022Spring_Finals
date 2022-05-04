@@ -6,11 +6,8 @@ de l'Automobile (FIA) and is owned by the Formula One Group.
 One of the fascinating components in F1 is the pit stop in which the players stop the car to perform maintenance such as tire replacement and fuel refilling within seconds. Thus, how to wisely utilize pit stops has become one popular topic in F1. And the authors of the previous project and we decided to focus on the strategies of F1 like pit stops distribution and eventually the effect on the ranking.
 
 ## Relavent Term Definition
-- Pit stop: 
-- Lap time:
-
-
-
+- Pit stop: The stop point for drivers to pull over and get their car maintenanced
+- Lap time: The time for a car to run one round of the total laps
 
 
 ## Contents
@@ -27,9 +24,7 @@ One of the fascinating components in F1 is the pit stop in which the players sto
       1. Hypothesis: 
    3. Exploratory Analysis on Car Constructors and Groups
    4. Results Summary
-      1. Pit Stop Strategy
-      2. Racing Speed Strategy
-      3. Other Topics
+
 
 ## 1. Original Work Review
 ### 1.1 Original Work Introduction
@@ -198,7 +193,24 @@ H0: There is no significant difference in the distribution of lap times STD betw
 
 ...
 
-### 2.3. Other Topics
+### 2.3 Exploratory Analysis on Car Constructors and Groups
+
+####2.3.1 Overview
+In addition to our hypotheses on F-1 Racing strategies, we also utilize other available file in the F-1 dataset and other
+data source to conduct some exploratory and descriptive analysis. In this case, we found that the car constructors and car groups
+presents some interesting patterns and trends regarding the winning times.
+
+#### 2.3.2 New Data Source
+Formula E Championship from Season 1 to 7
+
+Source: https://www.kaggle.com/datasets/mlandry/formula-e-championship
+
+#### 2.3.3 Winning Frequency
+
+We first plot the winning frequency in 
+
+![](https://imgur.com/a/8y6mh2G.png)
+
 
 ...
 
