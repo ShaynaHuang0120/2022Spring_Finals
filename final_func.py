@@ -205,61 +205,31 @@ def lap_data_process(df: pd.DataFrame, lap_df: pd.DataFrame) -> pd.DataFrame:
     :param lap_df: lap data to margin
     :return: the dataframe shows the standard deviation of time spent on laps for each driver in a race
     >>> test_df = pd.DataFrame({"raceId": [1]*8,"driverId": [1]*5+[2]*3,"positionOrder": [1]*5+[2]*3})
-    >>> test_lap_df = pd.DataFrame({"raceId":[1]*8,"driverId":[1]*5+[2]*3,"time":['1:38.109','5:33.006','4:32.713:3','1:32.803','2:22.547','3:21.308','2:26.446','1:32.605']})
+    >>> test_lap_df = pd.DataFrame({"raceId":[1]*8,"driverId":[1]*5+[2]*3,"milliseconds":['98109','100289','88132','283904','217333','189203','80103','163993']})
     >>> lap_data_process(test_df, test_lap_df)
        raceId  driverId  positionOrder  lap_time_STD
-    0       1         1              1     99.385333
-    1       1         2              2     47.070472
+    0       1         1              1     80.584135
+    1       1         2              2     49.467017
 
     """
     position_df = df[["raceId", "driverId", "positionOrder"]]
     joined_table = lap_df.merge(position_df, on=["raceId", "driverId"], how="left")
-    joined_table["time"] = joined_table["time"].str.split(':')
-
-    # new df from the column of lists
-    split_df = pd.DataFrame(joined_table["time"].tolist(), columns=['lap_minutes', 'lap_seconds', 'none'])
-    # concat df and split_df
-    joined_table = pd.concat([joined_table, split_df], axis=1)
-    joined_table["positionOrder"] = joined_table["positionOrder"].astype(int)
-    joined_table["lap_minutes"] = joined_table["lap_minutes"].astype(int)
-    joined_table["lap_second"] = joined_table["lap_minutes"].astype(float)
-
-    # since most of the time spend for each lap is below 5 minutes, we assumed that the time spent greater than 5
-    # minutes should be caused by accidents rather than strategy. Thus, we focus on lap with time spend less than 6
-    # minutes.
-    li = [1, 2, 3, 4, 5]
-    df_filtered = joined_table[joined_table['lap_minutes'].isin(li)]
-    df_filtered = df_filtered.assign(lap_time='')
-    sec = []
-    for time_list in df_filtered["time"]:
-        if time_list[0] == "1":
-            second = 60 + float(time_list[1])
-            sec.append(second)
-        elif time_list[0] == "2":
-            second = 120 + float(time_list[1])
-            sec.append(second)
-        elif time_list[0] == "3":
-            second = 180 + float(time_list[1])
-            sec.append(second)
-        elif time_list[0] == "4":
-            second = 240 + float(time_list[1])
-            sec.append(second)
-        elif time_list[0] == "5":
-            second = 300 + float(time_list[1])
-            sec.append(second)
-    df_filtered["lap_time"] = sec
-    df_group = df_filtered.groupby(["raceId", "driverId", 'positionOrder'], as_index=False)["lap_time"].std()
+    joined_table["milliseconds"] = joined_table["milliseconds"].astype(int)
+    # since most of the time spend for each lap is below 5 minutes, we assumed that the time spent greater than 5 minutes should be caused by accidents rather than strategy.
+    # Thus, we focus on lap with time spend less than 6 minutes.
+    joined_table= joined_table.loc[joined_table['milliseconds'] <= 360000]
+    joined_table['lap_second']= joined_table['milliseconds'] /1000
+    df_group = joined_table.groupby(["raceId", "driverId", 'positionOrder'], as_index=False)['lap_second'].std()
     df_group.sort_values(by=['raceId', 'positionOrder'], inplace=True)
-    df_group.rename(columns={'lap_time': 'lap_time_STD'}, inplace=True)
+    df_group.rename(columns={'lap_second': 'lap_time_STD'}, inplace=True)
     return df_group
-
 
 # hypothesis 1: pitstop_boxplot, stop_chart, analysis_of_variance
 def pitstop_boxplot(df: pd.DataFrame):
     """
-    this function used to create the boxplot which shows the race result of different amount of pit stop
+    this function used to create the boxplot which shows the distribution of position for drivers taking different number of pit stop
     :param df: the dataframe grouped by driver and race
-    :return: boxplot shows the race result of different amount of pit stop
+    :return: boxplot shows the distribution of position for drivers taking different number of pit stop
     >>> df = pd.DataFrame({"raceId":[1,2,2,4,6,7,3,3],"driverId":[1,2,3,4,5,6,7,1],'positionOrder':[3,4,5,1,2,2,1,3], "total_stops":[3,2,3,1,2,3,1,2]})
     >>> pitstop_boxplot(df)
     """
@@ -655,61 +625,47 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
 
 
 # hypothesis 4
-def rank_df_plt(df: pd.DataFrame, threshold=0.05):
+def rank_df_plt(df: pd.DataFrame, top_num = 5, threshold=0.05):
     """
     this function is used to separate the positionOrder to high ranking or low ranking,
-    index the STD by rounding up the number to the nearest multiple of 5,
-    create line graph showing the correlation between the ranking of drivers against the lap time std,
+    create histgram showing the correlation between the ranking of drivers against the lap time std,
     and calculate the Pvalue between high ranking drivers and low ranking drivers.
     :param df: the dataframe containing the standard deviation of time spent on laps for each driver in a race
+    :param top_num: the number (top 5) dividing the position orders as high ranking and low ranking
     :param threshold: the threshold used to evalute whether H0 should be rejected
-    :return: line graph showing the correlation between the ranking of drivers against the lap time std and whether there is difference in the distribution of lap times STD between the ranking of drivers.
+    :return: histgram showing the correlation between the ranking of drivers against the lap time std and whether there is difference in the distribution of lap times STD between the ranking of drivers.
     >>> test_df = pd.DataFrame({"raceId": [1]*8,"driverId": [1,2,3,4,5,6,7,8],"positionOrder": [1,2,3,4,5,6,7,8],"lap_time_STD":[2,5,1,3,4,2,3,6]})
     >>> rank_df_plt(test_df)
     H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.
     ----------------------------------------------------------------------------------------
-    P-value between high ranking drivers and low ranking drivers is 0.46512378882022054.
+    P-value between high ranking drivers and low ranking drivers is 0.9149990485758882.
     ----------------------------------------------------------------------------------------
     H0 cannot be rejected
     """
     print('H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.')
     rank_list = []
-    gap_list = []
-    df = df.assign(rank='', gap='')
-    highest_rank = df['positionOrder'].max()
+    df = df.assign(rank='')
     position_list = df['positionOrder'].tolist()
-    laptime_list = df['lap_time_STD'].tolist()
 
     for position in position_list:
-        if position <= (highest_rank / 2):
+        if position <= top_num:
             rank_list.append('High Rank')
         else:
             rank_list.append('Low Rank')
 
-    for item in laptime_list:
-        if item <= 70:
-            if item <= 1:
-                div = 1
-            else:
-                div = (item - 1) // 5 + 1
-            gap_list.append(5 * div)
-
-            if div == 0: print(item)
-        else:
-            gap_list.append('NA')
-
     df['rank'] = rank_list
-    df['gap'] = gap_list
-    df = df[df['gap'] != "NA"]
-    df_groupby = df.groupby(['rank', 'gap'], as_index=False)['driverId'].count()
-    pivot = pd.pivot_table(data=df_groupby, index=["gap"], columns=['rank'], aggfunc='sum', fill_value=0)
-    pivot.plot(linewidth=4, alpha=0.7, color=['tab:blue', 'lightcoral'])
-    plt.legend(labels=['High Rank', 'Low Rank'], bbox_to_anchor=(1.05, 1.0), loc='upper left')
-    plt.ylabel('Number of Drivers')
+    df_high = df.loc[df['rank'] == 'High Rank']['lap_time_STD']
+    df_low = resample(df.loc[df['rank'] == 'High Rank']['lap_time_STD'], replace=True, n_samples=len(df_high), random_state=123)
+    bins = np.linspace(0, 40, 20)
+    color_bin = ['tab:blue', 'tab:orange', 'tab:red']
+    plt.hist(df_low, bins, alpha=0.8, color=color_bin[2], label='Low Ranking')
+    plt.hist(df_high, bins, alpha=0.8, color=color_bin[0], label='High Ranking')
+    plt.title(f'Frequency Distribution of Lap time STD')
+    plt.ylabel('Record Frequency')
     plt.xlabel('Lap time STD')
+    plt.legend(loc="upper right")
     plt.show()
-    pvalue = mannwhitneyu(df[df['rank'] == "High Rank"]['lap_time_STD'],
-                          df[df['rank'] == "Low Rank"]['lap_time_STD']).pvalue
+    pvalue = mannwhitneyu(df_high,df_low).pvalue
     print('-' * 88)
     print('P-value between high ranking drivers and low ranking drivers is {}.'.format(pvalue))
     print('-' * 88)
@@ -733,7 +689,7 @@ def barchart_lapspeed(df: pd.DataFrame) -> plt:
     plt.xlabel('Position', fontsize='12', rotation=1)
     plt.ylabel('Mean of lap time STD', fontsize='12')
     plt.xticks(rotation=1)
-    plt.title('Distribution of lap time by rank', fontsize='12')
+    plt.title(f'Distribution of lap time by rank', fontsize='12')
     plt.show()
 
 
