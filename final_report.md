@@ -181,6 +181,7 @@ Thus, we concluded that we accept the null hypothesis that the evenly distribute
 ![](https://imgur.com/TRHlLGf.png)
 
 ![](https://imgur.com/hDUtuXh.png)
+
 ![](https://imgur.com/PFJJ11l.png)
 
 
