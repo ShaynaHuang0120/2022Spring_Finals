@@ -6,11 +6,8 @@ de l'Automobile (FIA) and is owned by the Formula One Group.
 One of the fascinating components in F1 is the pit stop in which the players stop the car to perform maintenance such as tire replacement and fuel refilling within seconds. Thus, how to wisely utilize pit stops has become one popular topic in F1. And the authors of the previous project and we decided to focus on the strategies of F1 like pit stops distribution and eventually the effect on the ranking.
 
 ## Relavent Term Definition
-- Pit stop: 
-- Lap time:
-
-
-
+- Pit stop: The stop point for drivers to pull over and get their car maintenanced
+- Lap time: The time for a car to run one round of the total laps
 
 
 ## Contents
@@ -27,9 +24,7 @@ One of the fascinating components in F1 is the pit stop in which the players sto
       1. Hypothesis: 
    3. Exploratory Analysis on Car Constructors and Groups
    4. Results Summary
-      1. Pit Stop Strategy
-      2. Racing Speed Strategy
-      3. Other Topics
+
 
 ## 1. Original Work Review
 ### 1.1 Original Work Introduction
@@ -90,13 +85,23 @@ Our goals in this project includes two main parts and improvements:
 ### 2.1. Pit Stop Strategy
 
 #### 2.1.1. Hypothesis: Fewer pit stops give the driver a better rank in each race
+
+The following boxplot shows the distribution of position for drivers taking different number of pit stop. As we can see, drivers taking 1 pit stop usually get position around 7, and it goes up to around 9 and 10 for drivers taking more than 1 pit stop. The result can be one of the evidence proving the hypothesis.
+
 ![](https://imgur.com/rkg3PXE.png)
+
+Since the medium of positions  
+We then focus on drivers taking 1, 2 or 3 pit stops. 
+For drivers taking 1 pit stop, the distribution of rank concentrates on rank 1 to 10, and the concentrated distribution extends to 1 to 13 for drivers taking 2 pit stop.
+However, when drivers take 3 pit stop, their ranks are mainly distributed from rank 10 to 15. The results prove the positive relationship between pit stop counts and positions.
 
 ![](https://imgur.com/5PZRGWr.png)
 
-![](https://imgur.com/GHVgd9A.png)
+![](https://imgur.com/GHVgd9A.png) 
 
 ![](https://imgur.com/US8ivgu.png)
+
+To strengthen the analysis result, we conducted the Mann-Whitney U test to verify whether there is a significant difference in rank distribution between drivers taking a different number of total pit stops. The analysis results show there is a difference. 
 
 ![](https://imgur.com/He5EIhD.png)
 
@@ -178,17 +183,34 @@ Thus, we concluded that we accept the null hypothesis that the evenly distribute
  
 ### 2.2. Racing Speed Strategy
 #### 2.2.1. Hypothesis: Evenly distributed lap time gives better results
+
 ![](https://imgur.com/TRHlLGf.png)
 
-![](https://imgur.com/hDUtuXh.png)
+H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.
 
 ![](https://imgur.com/PFJJ11l.png)
-
-
+![](https://imgur.com/oTsj1JP.png)
 
 ...
 
-### 2.3. Other Topics
+### 2.3 Exploratory Analysis on Car Constructors and Groups
+
+####2.3.1 Overview
+In addition to our hypotheses on F-1 Racing strategies, we also utilize other available file in the F-1 dataset and other
+data source to conduct some exploratory and descriptive analysis. In this case, we found that the car constructors and car groups
+presents some interesting patterns and trends regarding the winning times.
+
+#### 2.3.2 New Data Source
+Formula E Championship from Season 1 to 7
+
+Source: https://www.kaggle.com/datasets/mlandry/formula-e-championship
+
+#### 2.3.3 Winning Frequency
+
+We first plot the winning frequency in 
+
+![](https://imgur.com/a/8y6mh2G.png)
+
 
 ...
 
