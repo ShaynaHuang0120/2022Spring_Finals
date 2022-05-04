@@ -83,6 +83,16 @@ Our goals in this project includes two main parts and improvements:
 ...
 
 #### 2.1.1. Hypothesis: Fewer pit stops give the driver a better rank in each race
+![](https://imgur.com/rkg3PXE.png)
+
+![](https://imgur.com/5PZRGWr.png)
+
+![](https://imgur.com/GHVgd9A.png)
+
+![](https://imgur.com/US8ivgu.png)
+
+![](https://imgur.com/He5EIhD.png)
+
 
 #### 2.1.2. Hypothesis: The pit stops are evenly distributed through time
 
@@ -160,6 +170,13 @@ Similarly, we compare the results of higher ranking drivers with the lower ranki
 Thus, we concluded that we accept the null hypothesis that the evenly distributed pit stops give better racing results.
  
 ### 2.2. Racing Speed Strategy
+#### 2.2.1. Hypothesis: Evenly distributed lap time gives better results
+![](https://imgur.com/TRHlLGf.png)
+
+![](https://imgur.com/hDUtuXh.png)
+![](https://imgur.com/PFJJ11l.png)
+
+
 
 ...
 
