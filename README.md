@@ -18,11 +18,11 @@ In this project, we utilized one of the previous final projects in IS 597PR as t
 work had problems with coding, corresponding analyses, and many other types of issues. Besides, revising and improving the original work,
 we also developed our own new hypotheses and analyses on the new dataset and data source, making the original topic a broader one.
 
-## Repository Overview & Instructions
+## Repository Description & Instruction
 ### Folders:
 - data: Datasets we apply through all python file and Jupiter Notebooks
 - image: All the pictures generated and shown in the Jupiter Notebooks
-- presentation：The PowerPoint file (slides) used for the final presentation
+- presentation: The PowerPoint file (slides) used for the final presentation
 
 
 
@@ -30,7 +30,7 @@ we also developed our own new hypotheses and analyses on the new dataset and dat
 ### Files in main:
 - README.md: Overview of the project and the end-user instructions
 - Hypothesis - xxx: Jupiter Notebooks to illustrate each hypothesis' code
-- Exploratory Analysis on Car Constructors and Groups: A Jupiter Notebook analyzing the car constructors and groups in F1 and Formula E.
+- Exploratory_Analysis_Constructors_Groups: A Jupiter Notebook analyzing the car constructors and groups in F1 and Formula E.
 - final_report: A comprehensive report to describe all of our research and findings
 - final_func.py: Functions used for data analytic and visualization
 
