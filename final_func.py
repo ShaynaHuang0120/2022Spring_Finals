@@ -198,7 +198,8 @@ def pit_stop_group(df: pd.DataFrame, by='pit_order'):
         _df_group.sort_values(by=["raceId", 'driverId'], inplace=True)
         return _df_group
 
-def lap_data_process(df: pd.DataFrame, lap_df:pd.DataFrame)-> pd.DataFrame:
+
+def lap_data_process(df: pd.DataFrame, lap_df: pd.DataFrame) -> pd.DataFrame:
     """
     this function is used to process time spent on laps for each driver
     :param df: dataframe containing raceId, driverId and positionOrder
@@ -212,26 +213,28 @@ def lap_data_process(df: pd.DataFrame, lap_df:pd.DataFrame)-> pd.DataFrame:
     1       1         2              2     47.070472
 
     """
-    position_df= df[["raceId", "driverId", "positionOrder"]]
-    joined_table = lap_df.merge(position_df, on = ["raceId", "driverId"], how = "left")
-    joined_table["time"]= joined_table["time"].str.split(':')
+    position_df = df[["raceId", "driverId", "positionOrder"]]
+    joined_table = lap_df.merge(position_df, on=["raceId", "driverId"], how="left")
+    joined_table["time"] = joined_table["time"].str.split(':')
 
     # new df from the column of lists
-    split_df = pd.DataFrame(joined_table["time"].tolist(), columns=['lap_minutes', 'lap_seconds','none'])
+    split_df = pd.DataFrame(joined_table["time"].tolist(), columns=['lap_minutes', 'lap_seconds', 'none'])
     # concat df and split_df
     joined_table = pd.concat([joined_table, split_df], axis=1)
-    joined_table["positionOrder"] = joined_table["positionOrder"] .astype(int)
-    joined_table["lap_minutes"] = joined_table["lap_minutes"] .astype(int)
-    joined_table["lap_second"] = joined_table["lap_minutes"] .astype(float)
+    joined_table["positionOrder"] = joined_table["positionOrder"].astype(int)
+    joined_table["lap_minutes"] = joined_table["lap_minutes"].astype(int)
+    joined_table["lap_second"] = joined_table["lap_minutes"].astype(float)
 
-    #since most of the time spend for each lap is below 5 minutes, we assumed that the time spent greater than 5 minutes should be caused by accidents rather than strategy. Thus, we focus on lap with time spend less than 6 minutes.
-    li=[1,2,3,4,5]
+    # since most of the time spend for each lap is below 5 minutes, we assumed that the time spent greater than 5
+    # minutes should be caused by accidents rather than strategy. Thus, we focus on lap with time spend less than 6
+    # minutes.
+    li = [1, 2, 3, 4, 5]
     df_filtered = joined_table[joined_table['lap_minutes'].isin(li)]
     df_filtered = df_filtered.assign(lap_time='')
     sec = []
     for time_list in df_filtered["time"]:
         if time_list[0] == "1":
-            second= 60 + float(time_list[1])
+            second = 60 + float(time_list[1])
             sec.append(second)
         elif time_list[0] == "2":
             second = 120 + float(time_list[1])
@@ -246,10 +249,11 @@ def lap_data_process(df: pd.DataFrame, lap_df:pd.DataFrame)-> pd.DataFrame:
             second = 300 + float(time_list[1])
             sec.append(second)
     df_filtered["lap_time"] = sec
-    df_group = df_filtered.groupby(["raceId","driverId",'positionOrder'], as_index=False)["lap_time"].std()
-    df_group.sort_values(by=['raceId','positionOrder'], inplace=True)
-    df_group.rename(columns = {'lap_time':'lap_time_STD'}, inplace = True)
+    df_group = df_filtered.groupby(["raceId", "driverId", 'positionOrder'], as_index=False)["lap_time"].std()
+    df_group.sort_values(by=['raceId', 'positionOrder'], inplace=True)
+    df_group.rename(columns={'lap_time': 'lap_time_STD'}, inplace=True)
     return df_group
+
 
 # hypothesis 1: pitstop_boxplot, stop_chart, analysis_of_variance
 def pitstop_boxplot(df: pd.DataFrame):
@@ -650,8 +654,9 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
             plt.savefig(f'image/hypo3/err_mean_{i}.png', transparent=False)
         plt.show()
 
-#hypothesis 4
-def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
+
+# hypothesis 4
+def rank_df_plt(df: pd.DataFrame, threshold=0.05):
     """
     this function is used to separate the positionOrder to high ranking or low ranking,
     index the STD by rounding up the number to the nearest multiple of 5,
@@ -670,60 +675,42 @@ def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
     """
     print('H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.')
     rank_list = []
-    gap_list =[]
-    df = df.assign(rank='', gap ='')
+    gap_list = []
+    df = df.assign(rank='', gap='')
     highest_rank = df['positionOrder'].max()
     position_list = df['positionOrder'].tolist()
     laptime_list = df['lap_time_STD'].tolist()
 
     for position in position_list:
-        if position <= (highest_rank/2):
+        if position <= (highest_rank / 2):
             rank_list.append('High Rank')
         else:
             rank_list.append('Low Rank')
 
     for item in laptime_list:
-        if item <= 5:
-            gap_list.append(5)
-        elif item <=10:
-            gap_list.append(10)
-        elif item <=15:
-            gap_list.append(15)
-        elif item <=20:
-            gap_list.append(20)
-        elif item <=25:
-            gap_list.append(25)
-        elif item <=30:
-            gap_list.append(30)
-        elif item <= 35:
-            gap_list.append(35)
-        elif item <= 40:
-            gap_list.append(40)
-        elif item <= 45:
-            gap_list.append(45)
-        elif item <= 50:
-            gap_list.append(50)
-        elif item <= 55:
-            gap_list.append(55)
-        elif item <= 60:
-            gap_list.append(60)
-        elif item <= 65:
-            gap_list.append(65)
-        elif item <= 70:
-            gap_list.append(70)
+        if item <= 70:
+            if item <= 1:
+                div = 1
+            else:
+                div = (item - 1) // 5 + 1
+            gap_list.append(5 * div)
+
+            if div == 0: print(item)
         else:
-            gap_list.append("NA")
+            gap_list.append('NA')
+
     df['rank'] = rank_list
     df['gap'] = gap_list
-    df = df[df['gap'] !="NA"]
-    df_groupby= df.groupby(['rank','gap'], as_index=False)['driverId'].count()
-    pivot = pd.pivot_table(data=df_groupby, index=["gap"],columns=['rank'], aggfunc='sum',fill_value=0)
-    pivot.plot(linewidth=4,alpha=0.7,color = ['tab:blue', 'lightcoral'])
+    df = df[df['gap'] != "NA"]
+    df_groupby = df.groupby(['rank', 'gap'], as_index=False)['driverId'].count()
+    pivot = pd.pivot_table(data=df_groupby, index=["gap"], columns=['rank'], aggfunc='sum', fill_value=0)
+    pivot.plot(linewidth=4, alpha=0.7, color=['tab:blue', 'lightcoral'])
     plt.legend(labels=['High Rank', 'Low Rank'], bbox_to_anchor=(1.05, 1.0), loc='upper left')
     plt.ylabel('Number of Drivers')
     plt.xlabel('Lap time STD')
-    plt.show
-    pvalue= mannwhitneyu(df[df['rank'] == "High Rank"]['lap_time_STD'], df[df['rank'] == "Low Rank"]['lap_time_STD']).pvalue
+    plt.show()
+    pvalue = mannwhitneyu(df[df['rank'] == "High Rank"]['lap_time_STD'],
+                          df[df['rank'] == "Low Rank"]['lap_time_STD']).pvalue
     print('-' * 88)
     print('P-value between high ranking drivers and low ranking drivers is {}.'.format(pvalue))
     print('-' * 88)
@@ -731,6 +718,7 @@ def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
         print("Reject H0.", "There is a difference.")
     else:
         print("H0 cannot be rejected")
+
 
 def barchart_lapspeed(df: pd.DataFrame) -> plt:
     """
@@ -742,12 +730,13 @@ def barchart_lapspeed(df: pd.DataFrame) -> plt:
     """
 
     df2 = df.groupby(['positionOrder'], as_index=False)["lap_time_STD"].mean()
-    df2.plot.bar(x='positionOrder', y='lap_time_STD', fontsize='9',alpha=0.7,color = ['tab:blue'])
+    df2.plot.bar(x='positionOrder', y='lap_time_STD', fontsize='9', alpha=0.7, color=['tab:blue'])
     plt.xlabel('Position', fontsize='12', rotation=1)
     plt.ylabel('Mean of lap time STD', fontsize='12')
     plt.xticks(rotation=1)
     plt.title('Distribution of lap time by rank', fontsize='12')
     plt.show()
+
 
 if __name__ == '__main__':
     # Load data
@@ -759,7 +748,7 @@ if __name__ == '__main__':
     merge_df = merge_data([pit, results, status])
     merge_df = process_data(merge_df)
     df_dict = pit_stop_group(merge_df)
-    lap_df =lap_data_process(results, lap)
+    lap_df = lap_data_process(results, lap)
     # Hypothesis 1
     df_group = pit_stop_group(merge_df, by='total_stops')
     pitstop_boxplot(df_group)

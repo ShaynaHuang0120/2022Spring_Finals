@@ -80,8 +80,6 @@ Our goals in this project includes two main parts and improvements:
 ## 2. Data Analytics of Racing Strategies of Formula One
 ### 2.1. Pit Stop Strategy
 
-...
-
 #### 2.1.1. Hypothesis: Fewer pit stops give the driver a better rank in each race
 ![](https://imgur.com/rkg3PXE.png)
 
