@@ -188,12 +188,9 @@ Thus, we concluded that we accept the null hypothesis that the evenly distribute
 ### 2.2. Racing Speed Strategy
 #### 2.2.1. Hypothesis: Evenly distributed lap time gives better results
 
-![](https://imgur.com/TRHlLGf.png)
+![](https://imgur.com/lGdnCXZ.png)
 
-H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.
-
-![](https://imgur.com/PFJJ11l.png)
-![](https://imgur.com/oTsj1JP.png)
+![](https://imgur.com/mxBrEwq.png)
 
 ...
 
