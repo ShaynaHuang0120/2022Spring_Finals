@@ -664,6 +664,7 @@ def rank_df_plt(df: pd.DataFrame, top_num = 5, threshold=0.05):
     plt.ylabel('Record Frequency')
     plt.xlabel('Lap time STD')
     plt.legend(loc="upper right")
+    print('-' * 88)
     plt.show()
     pvalue = mannwhitneyu(df_high,df_low).pvalue
     print('-' * 88)
