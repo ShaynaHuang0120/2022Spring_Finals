@@ -91,25 +91,27 @@ Our goals in this project includes two main parts and improvements:
 
 #### 2.1.1. Hypothesis: Fewer pit stops give the driver a better rank in each race
 
-The following boxplot shows the distribution of position for drivers taking different number of pit stop. As we can see, drivers taking 1 pit stop usually get position around 7, and it goes up to around 9 and 10 for drivers taking more than 1 pit stop. The result can be one of the evidence proving the hypothesis.
+The following boxplot shows the distribution of position for drivers taking different number of pit stop. As we can see, drivers taking 1 pit stop usually get position around 7, and it goes up to around 9 and 10 for drivers taking more than 1 pit stop. 
 
 ![](https://imgur.com/rkg3PXE.png)
 
-Since the medium of positions  
-We then focus on drivers taking 1, 2 or 3 pit stops. 
+The results prove that the less the total pit stops take, the higher rank the drivers get. 
+Since pit stops ranging from 1 to 3 have better interpretation of the correlation, we then focus on drivers taking 1, 2 or 3 pit stops to do the following detailed analysis. 
 For drivers taking 1 pit stop, the distribution of rank concentrates on rank 1 to 10, and the concentrated distribution extends to 1 to 13 for drivers taking 2 pit stop.
 However, when drivers take 3 pit stop, their ranks are mainly distributed from rank 10 to 15. The results prove the positive relationship between pit stop counts and positions.
-
+    
 ![](https://imgur.com/5PZRGWr.png)
 
 ![](https://imgur.com/GHVgd9A.png) 
 
 ![](https://imgur.com/US8ivgu.png)
 
-To strengthen the analysis result, we conducted the Mann-Whitney U test to verify whether there is a significant difference in rank distribution between drivers taking a different number of total pit stops. The analysis results show there is a difference. 
+To strengthen the analysis result, we compare the rank distribution of drivers taking 1, 2 or 3 pit stops and test them with the non-parametric Mann-Whitney U tests.
 
 ![](https://imgur.com/He5EIhD.png)
 
+The resulting p-values are range from 0.00000000000279 to 0.00008, meaning that all the tests are significant against the 0.05 significance level.
+In conclusion, we reject the null hypothesis and determine the rank distributions between drivers taking 1, 2 or 3 total pit stops are significantly different.
 
 #### 2.1.2. Hypothesis: The pit stops are evenly distributed through time
 
