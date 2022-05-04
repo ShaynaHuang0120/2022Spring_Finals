@@ -40,7 +40,7 @@ One of the fascinating components in F1 is the pit stop in which the players sto
 #### 1.1.1 Original Dataset
 Data Source: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
 
-The dataset include 14 csv files for all the relevant information of F1 racing including circuits, drivers, races, results, lap times, pit stops, qualifying, championships, and constructors.
+The dataset includes 14 CSV files for all the relevant information about F1 racing including circuits, drivers, races, results, lap times, pit stops, qualifying, championships, and constructors.
 #### 1.1.2 Original work Description
 Original Work GitHub Link: https://github.com/ho-yi-shiuan/2021_Spring_finals
 
@@ -95,15 +95,15 @@ Our goals in this project includes two main parts and improvements:
 
 #### 2.1.1. Hypothesis: Fewer pit stops give the driver a better rank in each race
 
-The following boxplot shows the distribution of position for drivers taking different number of pit stop. As we can see, drivers taking 1 pit stop usually get position around 7, and it goes up to around 9 and 10 for drivers taking more than 1 pit stop. 
+The following boxplot shows the distribution of position for drivers taking a different number of pit stops. As we can see, drivers taking 1 pit stop usually get position around 7, and it goes up to around 9 and 10 for drivers taking more than 1 pit stop. 
 
 ![](https://imgur.com/rkg3PXE.png)
 
 The results prove that the less the total pit stops take, the higher rank the drivers get. 
-Since pit stops ranging from 1 to 3 have better interpretation of the correlation, we then focus on drivers taking 1, 2 or 3 pit stops to do the following detailed analysis. 
-For drivers taking 1 pit stop, the distribution of rank concentrates on rank 1 to 10, and the concentrated distribution extends to 1 to 13 for drivers taking 2 pit stop.
-However, when drivers take 3 pit stop, their ranks are mainly distributed from rank 10 to 15. The results prove the positive relationship between pit stop counts and positions.
-    
+Since pit stops ranging from 1 to 3 have a better interpretation of the correlation, we then focus on drivers taking 1, 2, or 3 pit stops to do the following detailed analysis. 
+For drivers taking 1 pit stop, the distribution of rank concentrates on ranks 1 to 10, and the concentrated distribution extends to 1 to 13 for drivers taking 2 pit stops.
+However, when drivers take 3 pit stops, their ranks are mainly distributed from ranks 10 to 15. The results prove the positive relationship between pit stop counts and positions.
+
 ![](https://imgur.com/5PZRGWr.png)
 
 ![](https://imgur.com/GHVgd9A.png) 
@@ -154,7 +154,7 @@ In conclusion, we reject the null hypothesis and determine that the time points 
 
 #### 2.1.3. Hypothesis: Evenly distributed pit stops give better race results
 
-To learn about the differences in the distributions of the pit stops of different position rankings, we first divide the dataset into two categories: high ranking and low ranking. The high ranking data are those with position order higher than 6, while the low ranking data are the rest, i.e. all the data below rank 5. To balance the cardinality of the two dataset, we resample the lower ranking data to the size of the high ranking data. And then, we plot them with histograms like we did for the Hypothesis 2, and here are what we got.
+To learn about the differences in the distributions of the pit stops of different position rankings, we first divide the dataset into two categories: high ranking and low ranking. The high ranking data are those with a position order higher than 6, while the low ranking data are the rest, i.e. all the data below rank 5. To balance the cardinality of the two datasets, we resample the lower ranking data to the size of the high-ranking data. And then, we plot them with histograms as we did for Hypothesis 2, and here is what we got.
 
 #### Total Pit Stop = 1
 ##### no. 1 pit stop
@@ -174,7 +174,7 @@ To learn about the differences in the distributions of the pit stops of differen
 
 From the histogram plots above, we can tell that the Lap Proportion distributions of the higher-ranking results are more evenly distributed across the entire race than the lower-ranking results. 
 
-The differences are statistically significant given the significance level of 0.05 for some pit stop order, including the first pit of total 2 pit stops and the all three pits of the total 3 pit stops. Here are the statistics for each data group.
+The differences are statistically significant given the significance level of 0.05 for some pit stop orders, including the first pit of a total of 2 pit stops and all three pits of the total 3 pit stops. Here are the statistics for each data group.
 
 ![](https://i.imgur.com/EiEiMJ1.png)
 
@@ -229,15 +229,14 @@ We first plot the winning frequency in
 
 ### 2.4. Results Summary
 
-#### 2.4.1. Pit Stop Strategy
-
 According to the results of the hypothesis tests under the topic of pit-stopping, we learn that we accept all the null hypotheses except the second one. 
 
 We learned that the strategy of having fewer pit stops appears to have a positive effect on giving the driver a better rank in races. We suspect the reason behind this phenomenon is that the drivers who choose to pit fewer tend to have confidence in their equipment so that they think only one pit or two could be enough for the entire race. Conversely, their confidence could be from the quality and stability of their equipment, and, thus, the quality and stability lower the chances of accidents or equipment malfunctions. 
 
 We learned that the pit stops are not ideally evenly distributed throughout the races. Instead, it seems that the drivers tend to pit before arriving at the evenly dividing points. Such a shift in the distribution could be accounted for that the drivers will follow their pit-stopping plans and usually will only pit in advance when they think something goes wrong.
 
-We learned that the drivers who distribute the lap proportions of their pit stops evenly tend to have better race results. The better usage of equipment (tires, gasoline, ...) could be part of the contributing factor of such a phenomenon.
+We learned that the drivers who distribute the lap proportions of their pit stop evenly tend to have better race results. The better usage of equipment (tires, gasoline, ...) could be part of the contributing factor to such a phenomenon.
+
 
 
 
