@@ -106,7 +106,9 @@ To strengthen the analysis result, we compare the rank distribution of drivers t
 ![](https://imgur.com/He5EIhD.png)
 
 The resulting p-values are range from 0.00000000000279 to 0.00008, meaning that all the tests are significant against the 0.05 significance level.
-In conclusion, we reject the null hypothesis and determine the rank distributions between drivers taking 1, 2 or 3 total pit stops are significantly different.
+Thus, we reject the null hypothesis and determine the rank distributions between drivers taking 1, 2 or 3 total pit stops are significantly different.
+
+In conclusion, we accept the hypothesis that fewer pit stops give the driver a better rank in each race.
 
 #### 2.1.2. Hypothesis: The pit stops are evenly distributed through time
 
