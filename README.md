@@ -23,16 +23,15 @@ we also developed our own new hypotheses and analyses on the new dataset and dat
 - data: Datasets we apply through all python file and Jupiter Notebooks
 - image: All the pictures generated and shown in the Jupiter Notebooks
 - presentation: The PowerPoint file (slides) used for the final presentation
-
-
-
+- efficiency: folder for efficiency method (Cython) related files
 
 ### Files in main:
 - README.md: Overview of the project and the end-user instructions
-- Hypothesis - xxx: Jupiter Notebooks to illustrate each hypothesis' code
-- Exploratory_Analysis_Constructors_Groups: A Jupiter Notebook analyzing the car constructors and groups in F1 and Formula E.
-- final_report: A comprehensive report to describe all of our research and findings
+- Hypothesis - xxx.ipynb: Jupiter Notebooks to illustrate each hypothesis' code
+- EDA - Constructor and Groups.ipynb: A Jupiter Notebook analyzing the car constructors and groups in F1 and Formula E.
+- final_report.md: A comprehensive report to describe all of our research and findings
 - final_func.py: Functions used for data analytic and visualization
+- Efficiency Techniques Application.ipynb: A Jupyter Notebook comparing the running speed with & without using Cython Optimizations
 
 ### User Instruction
 - Each hypothesis Jupiter Notebook presents the coding part and the output
