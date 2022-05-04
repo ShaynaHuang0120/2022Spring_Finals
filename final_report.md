@@ -90,13 +90,23 @@ Our goals in this project includes two main parts and improvements:
 ### 2.1. Pit Stop Strategy
 
 #### 2.1.1. Hypothesis: Fewer pit stops give the driver a better rank in each race
+
+The following boxplot shows the distribution of position for drivers taking different number of pit stop. As we can see, drivers taking 1 pit stop usually get position around 7, and it goes up to around 9 and 10 for drivers taking more than 1 pit stop. The result can be one of the evidence proving the hypothesis.
+
 ![](https://imgur.com/rkg3PXE.png)
+
+Since the medium of positions  
+We then focus on drivers taking 1, 2 or 3 pit stops. 
+For drivers taking 1 pit stop, the distribution of rank concentrates on rank 1 to 10, and the concentrated distribution extends to 1 to 13 for drivers taking 2 pit stop.
+However, when drivers take 3 pit stop, their ranks are mainly distributed from rank 10 to 15. The results prove the positive relationship between pit stop counts and positions.
 
 ![](https://imgur.com/5PZRGWr.png)
 
-![](https://imgur.com/GHVgd9A.png)
+![](https://imgur.com/GHVgd9A.png) 
 
 ![](https://imgur.com/US8ivgu.png)
+
+To strengthen the analysis result, we conducted the Mann-Whitney U test to verify whether there is a significant difference in rank distribution between drivers taking a different number of total pit stops. The analysis results show there is a difference. 
 
 ![](https://imgur.com/He5EIhD.png)
 
@@ -178,12 +188,13 @@ Thus, we concluded that we accept the null hypothesis that the evenly distribute
  
 ### 2.2. Racing Speed Strategy
 #### 2.2.1. Hypothesis: Evenly distributed lap time gives better results
+
 ![](https://imgur.com/TRHlLGf.png)
 
-![](https://imgur.com/hDUtuXh.png)
+H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.
+
 ![](https://imgur.com/PFJJ11l.png)
-
-
+![](https://imgur.com/oTsj1JP.png)
 
 ...
 
