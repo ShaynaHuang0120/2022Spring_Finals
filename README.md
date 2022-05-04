@@ -20,22 +20,21 @@ we also developed our own new hypotheses and analyses on the new dataset and dat
 
 ## Repository Overview & Instructions
 ### Folders:
-- data: All the datasets we apply through all python file and Jupiter Notebooks
+- data: Datasets we apply through all python file and Jupiter Notebooks
 - image: All the pictures generated and shown in the Jupiter Notebooks
-- Presentation： The PowerPoint file (slides) used for the final presentation
-- archive:
-- .idea:
+- presentation：The PowerPoint file (slides) used for the final presentation
+
 
 
 
 ### Files in main:
 - README.md: Overview of the project and the end-user instructions
-- final_func.py: Functions used for data analytic and visualization
-- hypothesis 1- 4: Jupiter Notebooks to illustrate each hypothesis' code
+- Hypothesis - xxx: Jupiter Notebooks to illustrate each hypothesis' code
+- Exploratory Analysis on Car Constructors and Groups: A Jupiter Notebook analyzing the car constructors and groups in F1 and Formula E.
 - final_report: A comprehensive report to describe all of our research and findings
-- xxxx:
+- final_func.py: Functions used for data analytic and visualization
 
-### End-user Instruction
+### User Instruction
 - Each hypothesis Jupiter Notebook presents the coding part and the output
 - To view our results as a whole, please read the final_report in which we presented all of our analyses, visualizations, and
 conclusions in sequence.
