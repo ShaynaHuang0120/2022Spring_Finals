@@ -203,7 +203,7 @@ def lap_data_process(df: pd.DataFrame, lap_df:pd.DataFrame)-> pd.DataFrame:
     this function is used to process time spent on laps for each driver
     :param df: dataframe containing raceId, driverId and positionOrder
     :param lap_df: lap data to margin
-    :return: the standard deviation of time spent on laps for each driver in a race
+    :return: the dataframe shows the standard deviation of time spent on laps for each driver in a race
     >>> test_df = pd.DataFrame({"raceId": [1]*8,"driverId": [1]*5+[2]*3,"positionOrder": [1]*5+[2]*3})
     >>> test_lap_df = pd.DataFrame({"raceId":[1]*8,"driverId":[1]*5+[2]*3,"time":['1:38.109','5:33.006','4:32.713:3','1:32.803','2:22.547','3:21.308','2:26.446','1:32.605']})
     >>> lap_data_process(test_df, test_lap_df)
@@ -257,6 +257,8 @@ def pitstop_boxplot(df: pd.DataFrame):
     this function used to create the boxplot which shows the race result of different amount of pit stop
     :param df: the dataframe grouped by driver and race
     :return: boxplot shows the race result of different amount of pit stop
+    >>> df = pd.DataFrame({"raceId":[1,2,2,4,6,7,3,3],"driverId":[1,2,3,4,5,6,7,1],'positionOrder':[3,4,5,1,2,2,1,3], "total_stops":[3,2,3,1,2,3,1,2]})
+    >>> pitstop_boxplot(df)
     """
     boxplot_base = df[["total_stops", "positionOrder"]]
     boxplot = boxplot_base.boxplot(by="total_stops")
@@ -275,6 +277,8 @@ def stop_chart(df: pd.DataFrame, pit_stop: int, max_position: int):
     :param pit_stop: number of pit stop the chart consider
     :param max_position: the maximum rank the chart show
     :return: bar chart shows the count of positions when taking 1, 2 or 3 pit stops
+    >>> df = pd.DataFrame({"raceId":[1]*10,"driverId":[1,2,3,4,5,6,7,8,9,10],'positionOrder':[1,2,3,4,5,6,7,8,9,10], "total_stops":[1]*5+[2]*3+[3]*2})
+    >>> stop_chart(df,3,10)
     """
     df_filtered = df[df['positionOrder'] <= max_position]
     for i in range(1, pit_stop + 1):
@@ -649,19 +653,22 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
 #hypothesis 4
 def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
     """
-
-    :param df:
-    :param threshold:
-    :return:
+    this function is used to separate the positionOrder to high ranking or low ranking,
+    index the STD by rounding up the number to the nearest multiple of 5,
+    create line graph showing the correlation between the ranking of drivers against the lap time std,
+    and calculate the Pvalue between high ranking drivers and low ranking drivers.
+    :param df: the dataframe containing the standard deviation of time spent on laps for each driver in a race
+    :param threshold: the threshold used to evalute whether H0 should be rejected
+    :return: line graph showing the correlation between the ranking of drivers against the lap time std and whether there is difference in the distribution of lap times STD between the ranking of drivers.
     >>> test_df = pd.DataFrame({"raceId": [1]*8,"driverId": [1,2,3,4,5,6,7,8],"positionOrder": [1,2,3,4,5,6,7,8],"lap_time_STD":[2,5,1,3,4,2,3,6]})
     >>> rank_df_plt(test_df)
-    H0: There is no significant difference in standard deviation of time spent on laps between drivers with high ranking and drivers with low ranking.
+    H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.
     ----------------------------------------------------------------------------------------
     P-value between high ranking drivers and low ranking drivers is 0.46512378882022054.
     ----------------------------------------------------------------------------------------
     H0 cannot be rejected
     """
-    print('H0: There is no significant difference in standard deviation of time spent on laps between drivers with high ranking and drivers with low ranking.')
+    print('H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.')
     rank_list = []
     gap_list =[]
     df = df.assign(rank='', gap ='')
@@ -727,9 +734,9 @@ def rank_df_plt(df:pd.DataFrame, threshold = 0.05):
 
 def barchart_lapspeed(df: pd.DataFrame) -> plt:
     """
-
-    :param df:
-    :return:
+    this function is used to calculate the average standard deviation of time spent on laps for each position, and create the bar chart showing the distribution of the average STD
+    :param df: the dataframe containing the standard deviation of time spent on laps for each driver in a race
+    :return: bar chart showed the distribution of the average standard deviation of time spent on laps for each position
     >>> test_df = pd.DataFrame({"raceId": [1]*2,"driverId": [1,2],"positionOrder": [1,2],"lap_time_STD":[2,5]})
     >>> barchart_lapspeed(test_df)
     """
