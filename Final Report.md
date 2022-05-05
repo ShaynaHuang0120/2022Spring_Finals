@@ -221,7 +221,7 @@ Therefore, we concluded that we reject the hypothesis that evenly distributed la
 ### 2.3 Exploratory Analysis on Car Constructors and Groups
 We had a tough time finding a suitable, relevant, and applicable data source. After failing to find a comparable data source containing pit stops, we decided to move on to other topics to conduct an exploratory analysis to show something exciting that can be utilized for further research.
 
-####2.3.1 Overview
+#### 2.3.1 Overview
 Therefore, we  utilize other available file in the F-1 dataset and other
 data source to conduct the descriptive analysis. In this case, we found that the car constructors and car groups
 presents some interesting patterns and trends regarding the winning times.
