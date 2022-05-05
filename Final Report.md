@@ -234,7 +234,7 @@ Source: https://www.kaggle.com/datasets/mlandry/formula-e-championship
 
 We first plot the winning frequency in 
 
-![](https://imgur.com/a/8y6mh2G.png)
+![!plot](./image/Others/F1ConstructorWinTimes.png)
 
 
 ...
