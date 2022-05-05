@@ -628,12 +628,12 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
 def rank_df_plt(df: pd.DataFrame, top_num = 5, threshold=0.05):
     """
     this function is used to separate the positionOrder to high ranking or low ranking,
-    create histgram showing the correlation between the ranking of drivers against the lap time std,
+    create histogram showing the correlation between the ranking of drivers against the lap time std,
     and calculate the Pvalue between high ranking drivers and low ranking drivers.
     :param df: the dataframe containing the standard deviation of time spent on laps for each driver in a race
     :param top_num: the number (top 5) dividing the position orders as high ranking and low ranking
     :param threshold: the threshold used to evalute whether H0 should be rejected
-    :return: histgram showing the correlation between the ranking of drivers against the lap time std and whether there is difference in the distribution of lap times STD between the ranking of drivers.
+    :return: histogram showing the correlation between the ranking of drivers against the lap time std and whether there is difference in the distribution of lap times STD between the ranking of drivers.
     >>> test_df = pd.DataFrame({"raceId": [1]*8,"driverId": [1,2,3,4,5,6,7,8],"positionOrder": [1,2,3,4,5,6,7,8],"lap_time_STD":[2,5,1,3,4,2,3,6]})
     >>> rank_df_plt(test_df)
     H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.
@@ -688,7 +688,7 @@ def barchart_lapspeed(df: pd.DataFrame) -> plt:
     df2 = df.groupby(['positionOrder'], as_index=False)["lap_time_STD"].mean()
     df2.plot.bar(x='positionOrder', y='lap_time_STD', fontsize='9', alpha=0.7, color=['tab:blue'])
     plt.xlabel('Position', fontsize='12', rotation=1)
-    plt.ylabel('Mean of lap time STD', fontsize='12')
+    plt.ylabel('Average of lap time STD', fontsize='12')
     plt.xticks(rotation=1)
     plt.title(f'Distribution of lap time by rank', fontsize='12')
     plt.show()

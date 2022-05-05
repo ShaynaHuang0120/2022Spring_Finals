@@ -197,9 +197,24 @@ Thus, we concluded that we accept the null hypothesis that the evenly distribute
 ### 2.2. Racing Speed Strategy
 #### 2.2.1. Hypothesis: Evenly distributed lap time gives better results
 
-![](https://imgur.com/lGdnCXZ.png)
+Beside Pit Stop Strategy, we explored if there are other strategies taken by drivers. We found out that drivers usually take over 50 laps in a race, and the time they spent on each race is different. 
+Thus, we tried to figure out the relationship between the distribution of lap time and the driver's final ranking and assumed that evenly distributed lap time gives drivers better final ranking.
+We use standard deviation(std) of lap time for each driver in a race as an index to evaluate if the driver's lap time is evenly distributed. The lower the STD is, the more evenly the distribution of lap time is.
+
+The bar chart shows the average of lap time std between ranking 1 and 24. Except for the average of ranking 22 to 24, the rest average std are all around 9 without obvious fluctuation.
+Overall, the distribution of average std has no obvious difference, implying the lap time's distribution in a race has no impact on the driver’s final ranking.
+
+![](https://imgur.com/r4588hr.png)
+
+To strengthen the analytical results, we divided the data into two categories: high-ranking and low-ranking. 
+The high-ranking is defined by drivers winning the top 5 positions in a race, and drivers getting the rest position are classified as low-ranking.
+We then used the categorized data to create histogram showing the correlation between the ranking of drivers against the lap time std.
+In addition, we applied non-parametric Mann-Whitney U test to test if the two categories are significant different.
+Finally, the resulting P-value(0.308) higher than 0.05 indicates strong evidence for the null hypothesis: the difference is not statistically significant.
 
 ![](https://imgur.com/mxBrEwq.png)
+
+Therefore, we concluded that we reject the hypothesis that evenly distributed lap time gives better results.
 
 ...
 
