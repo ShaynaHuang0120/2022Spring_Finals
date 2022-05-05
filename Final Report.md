@@ -197,8 +197,8 @@ Thus, we concluded that we accept the null hypothesis that the evenly distribute
 ### 2.2. Racing Speed Strategy
 #### 2.2.1. Hypothesis: Evenly distributed lap time gives better results
 
-Beside Pit Stop Strategy, we explored if there are other strategies taken by drivers. We found out that drivers usually take over 50 laps in a race, and the time they spent on each race is different. 
-Thus, we tried to figure out the relationship between the distribution of lap time and the driver's final ranking and assumed that evenly distributed lap time gives drivers better final ranking.
+Beside Pit Stop Strategy, we explored if there are other strategies taken by drivers to get better position. We found out that drivers usually take over 50 laps in a race, and the time they spent on each race is different. 
+Thus, we tried to figure out the relationship between the distribution of lap time and the driver's final ranking, and assumed that evenly distributed lap time gives drivers better final ranking.
 We use standard deviation(std) of lap time for each driver in a race as an index to evaluate if the driver's lap time is evenly distributed. The lower the STD is, the more evenly the distribution of lap time is.
 
 The bar chart shows the average of lap time std between ranking 1 and 24. Except for the average of ranking 22 to 24, the rest average std are all around 9 without obvious fluctuation.
