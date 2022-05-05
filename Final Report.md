@@ -216,8 +216,6 @@ Finally, the resulting P-value(0.308) higher than 0.05 indicates strong evidence
 
 Therefore, we concluded that we reject the hypothesis that evenly distributed lap time gives better results.
 
-...
-
 ### 2.3 Exploratory Analysis on Car Constructors and Groups
 We had a tough time finding a suitable, relevant, and applicable data source. After failing to find a comparable data source containing pit stops, we decided to move on to other topics to conduct an exploratory analysis to show something exciting that can be utilized for further research.
 
@@ -246,6 +244,7 @@ After learning about the leading constructors in F-1 racing, we also want to exp
 Using similar filtering strategies, we can get the selected F-E winner data frame and plot the corresponding distribution.
 
 ![!plot](./image/Others/FECarGroupWinTimes.png)
+
 According to the above bar charts, we find a different story from F-1. 
 MB becomes the second least winner, and Red Bull even does not participate in Formula E, showing the vast gap between regular racing cars and the electric ones. Audi, which manufactures a variety of electric vehicles in the market, demonstrates its leading technology in the emerging field. We also find the French-Chinese team, Techeetah or DS Techeetah, has had an excellent performance on F-E in recent seasons.
 
