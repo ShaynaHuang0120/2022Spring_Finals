@@ -99,10 +99,10 @@ The following boxplot shows the distribution of position for drivers taking a di
 
 ![](https://imgur.com/rkg3PXE.png)
 
-The results prove that the less the total pit stops take, the higher rank the drivers get. 
+The results indicate that the less the total pit stops take, the higher rank the drivers get. 
 Since pit stops ranging from 1 to 3 have a better interpretation of the correlation, we then focus on drivers taking 1, 2, or 3 pit stops to do the following detailed analysis. 
 For drivers taking 1 pit stop, the distribution of rank concentrates on ranks 1 to 10, and the concentrated distribution extends to 1 to 13 for drivers taking 2 pit stops.
-However, when drivers take 3 pit stops, their ranks are mainly distributed from ranks 10 to 15. The results prove the positive relationship between pit stop counts and positions.
+However, when drivers take 3 pit stops, their ranks are mainly distributed from ranks 10 to 15. The results show the positive relationship between pit stop counts and positions.
 
 ![](https://imgur.com/5PZRGWr.png)
 
