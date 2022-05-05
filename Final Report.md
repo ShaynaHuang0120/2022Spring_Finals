@@ -219,10 +219,11 @@ Therefore, we concluded that we reject the hypothesis that evenly distributed la
 ...
 
 ### 2.3 Exploratory Analysis on Car Constructors and Groups
+We had a tough time finding a suitable, relevant, and applicable data source. After failing to find a comparable data source containing pit stops, we decided to move on to other topics to conduct an exploratory analysis to show something exciting that can be utilized for further research.
 
 ####2.3.1 Overview
-In addition to our hypotheses on F-1 Racing strategies, we also utilize other available file in the F-1 dataset and other
-data source to conduct some exploratory and descriptive analysis. In this case, we found that the car constructors and car groups
+Therefore, we  utilize other available file in the F-1 dataset and other
+data source to conduct the descriptive analysis. In this case, we found that the car constructors and car groups
 presents some interesting patterns and trends regarding the winning times.
 
 #### 2.3.2 New Data Source
@@ -230,15 +231,39 @@ Formula E Championship from Season 1 to 7
 
 Source: https://www.kaggle.com/datasets/mlandry/formula-e-championship
 
-#### 2.3.3 Winning Frequency
+#### 2.3.3 F-1 Constructor Winning Distribution
 
-We first plot the winning frequency in 
+To understand the leading manufacturers in F-1, we utilize the results and constructor datasets to identify their winning frequency. By limiting the recent 10 years' F-1 races and filtering results that have positions less or equal to 3, we are thus able to create the distribution with the value_count and plot functions. 
 
 ![!plot](./image/Others/F1ConstructorWinTimes.png)
 
+As shown above, we identify that Mercedes, Red Bull, and Ferrari are leading constructors in F-1 as their total winning times are greater than those of the rest of the constructors. 
+In detail, Mercedes-Benz (MB)wined 281 times (obtaining the first 3 places) during the last ten years, showing its robust technology in F-1 racing car building. In other words, when we are anticipating the results of one racing game, we should always make bets on MB. 
 
-...
+#### 2.3.4 F-E Team Group Winning Distribution
 
+After learning about the leading constructors in F-1 racing, we also want to explore whether those companies have a similar influence on other types of racing competitions. In this case, we utilize the dataset from Formula E (F-E), a racing competition for electric cars. 
+Using similar filtering strategies, we can get the selected F-E winner data frame and plot the corresponding distribution.
+
+![!plot](./image/Others/FECarGroupWinTimes.png)
+According to the above bar charts, we find a different story from F-1. 
+MB becomes the second least winner, and Red Bull even does not participate in Formula E, showing the vast gap between regular racing cars and the electric ones. Audi, which manufactures a variety of electric vehicles in the market, demonstrates its leading technology in the emerging field. We also find the French-Chinese team, Techeetah or DS Techeetah, has had an excellent performance on F-E in recent seasons.
+
+#### 2.3.5 Winning Trends for Leading Constructors in F-1
+So far, we have discovered that the leading constructors in F-1 do not possess the same impact on new technology car competitions. 
+Next, we want to explore whether these constructors always lead the races or they have had outstanding performances in recent years. As a result, we merge the results data frame with races to count their winning time yearly. 
+
+![!plot](./image/Others/MBwintimes.png)
+![!plot](./image/Others/RBWinTimes.png)
+![!plot](./image/Others/FerrariWinTimes.png)
+
+The above three line charts show a few applicable patterns to evaluate leading constructors' performances. First of all, all the line charts go down significantly in 2022 since this year's races have not been finished yet. 
+Second, MB has a relatively stable pattern compared to the other two leading constructors, showing its robust technology again. In addition, Ferrari seems to be losing its leading position as the winning time has decreased every year since 2017.
+
+#### 2.3.6 Summary of EDA
+
+To sum up, looking at constructors in F-1 and F-E competitions gives us a border understanding of F-1 racing beyond the racing strategies. Mercedes Benz is the most influential constructor in F-1 racing and holds its position steadily; however, it fails to dominate the electric car field and has a very poor performance in F-E events. The unstable winning trends also show why numerous fans love watching the event. Each race is full of uncertainties. 
+People would never know the winners like in other competitions before the final lap. Moreover, as electric cars are becoming the mainstream and replacing fuel cars, many traditional but influencing constructors such as Red Bull are still reluctant to embrace the new technology. The future of car racing also becomes uncertain now. Will the F-E become the dominant racing event, and all other constructors join it? Or people will keep loving the old school and enjoy the F-1 event.
 ### 2.4. Results Summary
 
 According to the results of the hypothesis tests under the topic of pit-stopping, we learn that we accept all the null hypotheses except the second one. 
