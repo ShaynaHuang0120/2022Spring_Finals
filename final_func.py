@@ -578,9 +578,13 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
     >>> results = pd.read_csv('data/results.csv')
     >>> status = pd.read_csv('data/status.csv')
     >>> test_df = merge_data([pit, results, status])
-    >>> test_df = process_data(test_df)[:200]
+    >>> test_df = process_data(test_df)[:500]
     >>> df_front, df_back = front_back_division(test_df, select_col='abs_deviation_mean')
-    >>> avg_deviation_plot(df_front,df_back)
+    >>> avg_deviation_plot(df_front,df_back)  # doctest:+ELLIPSIS
+    ----------------------------------------------------------------------------------------
+    Total Pit Stops = 1
+    ...
+    Higher ranking records have significantly lower mean deviations
     """
     bins = np.linspace(0, 1, 50)
     color_bin = ['tab:blue', 'tab:orange', 'tab:red']
@@ -637,6 +641,7 @@ def rank_df_plt(df: pd.DataFrame, top_num = 5, threshold=0.05):
     >>> test_df = pd.DataFrame({"raceId": [1]*8,"driverId": [1,2,3,4,5,6,7,8],"positionOrder": [1,2,3,4,5,6,7,8],"lap_time_STD":[2,5,1,3,4,2,3,6]})
     >>> rank_df_plt(test_df)
     H0: There is no significant difference in the distribution of lap times STD between the ranking of drivers.
+    <BLANKLINE>
     ----------------------------------------------------------------------------------------
     P-value between high ranking drivers and low ranking drivers is 0.9149990485758882.
     ----------------------------------------------------------------------------------------
@@ -720,3 +725,5 @@ if __name__ == '__main__':
     # Hypothesis 4
     rank_df_plt(lap_df)
     barchart_lapspeed(lap_df)
+
+
