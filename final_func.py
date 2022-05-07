@@ -578,9 +578,13 @@ def avg_deviation_plot(list_1: [pd.DataFrame], list_2: [pd.DataFrame], save_fig=
     >>> results = pd.read_csv('data/results.csv')
     >>> status = pd.read_csv('data/status.csv')
     >>> test_df = merge_data([pit, results, status])
-    >>> test_df = process_data(test_df)[:200]
+    >>> test_df = process_data(test_df)[:500]
     >>> df_front, df_back = front_back_division(test_df, select_col='abs_deviation_mean')
-    >>> avg_deviation_plot(df_front,df_back)
+    >>> avg_deviation_plot(df_front,df_back)  # doctest:+ELLIPSIS
+    ----------------------------------------------------------------------------------------
+    Total Pit Stops = 1
+    ...
+    Higher ranking records have significantly lower mean deviations
     """
     bins = np.linspace(0, 1, 50)
     color_bin = ['tab:blue', 'tab:orange', 'tab:red']
