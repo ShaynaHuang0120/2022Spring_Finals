@@ -51,7 +51,7 @@ we also developed our own new hypotheses and analyses on the new dataset and dat
 conclusions in sequence.
 - To view our coding part, Jupiter Notebooks can be a starting point and all functions used in notebooks are stored in final_func.py
 - For our dataset, we have included all necessary data files in the "data" folder.
-You can  download them from the links in Dataset Source Section. Make sure you still put all the downloaded files into
+You can also choose to download them from the links in Dataset Source Section. Make sure you still put all the downloaded files into
 a folder named "data" so as to run all programs and notebook successfully.
 ### Dataset Source
 F-1 Dataset: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020
