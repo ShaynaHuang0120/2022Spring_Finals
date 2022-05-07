@@ -699,31 +699,4 @@ def barchart_lapspeed(df: pd.DataFrame) -> plt:
     plt.show()
 
 
-# if __name__ == '__main__':
-#     # Load data
-#     pit = pd.read_csv('data/pit_stops.csv')
-#     results = pd.read_csv('data/results.csv')
-#     status = pd.read_csv('data/status.csv')
-#     lap = pd.read_csv("data/lap_times.csv")
-#     # Process the data files
-#     merge_df = merge_data([pit, results, status])
-#     merge_df = process_data(merge_df)
-#     df_dict = pit_stop_group(merge_df)
-#     lap_df = lap_data_process(results, lap)
-#     # Hypothesis 1
-#     df_group = pit_stop_group(merge_df, by='total_stops')
-#     pitstop_boxplot(df_group)
-#     stop_chart(df_group, 3, 22)
-#     analysis_of_variance(df_group)
-#     # Hypothesis 2
-#     distribution_plot(df_dict)
-#     # Hypothesis 3
-#     df_front, df_back = front_back_division(merge_df, top_num=5)
-#     comparison_plot(df_front, df_back)
-#     df_front, df_back = front_back_division(merge_df, select_col='abs_deviation_mean', top_num=5)
-#     avg_deviation_plot(df_front, df_back)
-#     # Hypothesis 4
-#     rank_df_plt(lap_df)
-#     barchart_lapspeed(lap_df)
-
 
