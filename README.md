@@ -50,7 +50,7 @@ we also developed our own new hypotheses and analyses on the new dataset and dat
 - To view our results as a whole, please read the final_report in which we presented all of our analyses, visualizations, and
 conclusions in sequence.
 - To view our coding part, Jupiter Notebooks can be a starting point and all functions used in notebooks are stored in 
-[final_func.py](Final Report.md).
+[final_func.py](https://github.com/TianciZheng/2022Spring_Finals/blob/main/Final%20Report.md).
 - For our dataset, we have included all necessary data files in the "data" folder.
 You can also choose to download them from the links in Dataset Source Section. Make sure you still put all the downloaded files into
 a folder named "data" to run all programs and notebook successfully.
