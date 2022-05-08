@@ -204,7 +204,7 @@ We use standard deviation(std) of lap time for each driver in a race as an index
 The bar chart shows the average of lap time std between ranking 1 and 24. Except for the average of ranking 22 to 24, the rest average std are all around 9 without obvious fluctuation.
 Overall, the distribution of average std has no obvious difference, implying the lap time's distribution in a race has no impact on the driver’s final ranking.
 
-![!plot](./image/hypo4/Lap time distribution.png)
+![!plot](./image/hypo4/LaptimeDistribution.png)
 
 To strengthen the analytical results, we divided the data into two categories: high-ranking and low-ranking. 
 The high-ranking is defined by drivers winning the top 5 positions in a race, and drivers getting the rest position are classified as low-ranking.
@@ -212,7 +212,7 @@ We then used the categorized data to create histogram showing the correlation be
 In addition, we applied non-parametric Mann-Whitney U test to test if the two categories are significant different.
 Finally, the resulting P-value(0.308) higher than 0.05 indicates strong evidence for the null hypothesis: the difference is not statistically significant.
 
-![!plot](./image/hypo4/Lap time distribution:ranking.png)
+![!plot](./image/hypo4/LaptimeDistribution:ranking.png)
 
 Therefore, we concluded that we reject the hypothesis that evenly distributed lap time gives better results.
 
