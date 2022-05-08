@@ -97,18 +97,18 @@ Our goals in this project includes two main parts and improvements:
 
 The following boxplot shows the distribution of position for drivers taking a different number of pit stops. As we can see, drivers taking 1 pit stop usually get position around 7, and it goes up to around 9 and 10 for drivers taking more than 1 pit stop. 
 
-![](https://imgur.com/rkg3PXE.png)
+![!plot](./image/hypo1/pitstop_boxplot.png)
 
 The results indicate that the less the total pit stops take, the higher rank the drivers get. 
 Since pit stops ranging from 1 to 3 have a better interpretation of the correlation, we then focus on drivers taking 1, 2, or 3 pit stops to do the following detailed analysis. 
 For drivers taking 1 pit stop, the distribution of rank concentrates on ranks 1 to 10, and the concentrated distribution extends to 1 to 13 for drivers taking 2 pit stops.
 However, when drivers take 3 pit stops, their ranks are mainly distributed from ranks 10 to 15. The results show the positive relationship between pit stop counts and positions.
 
-![](https://imgur.com/5PZRGWr.png)
+![!plot](./image/hypo1/pitstop1.png)
 
-![](https://imgur.com/GHVgd9A.png) 
+![!plot](./image/hypo1/pitstop2.png)
 
-![](https://imgur.com/US8ivgu.png)
+![!plot](./image/hypo1/pitstop3.png)
 
 To strengthen the analysis result, we compare the rank distribution of drivers taking 1, 2 or 3 pit stops and test them with the non-parametric Mann-Whitney U tests.
 
@@ -204,7 +204,7 @@ We use standard deviation(std) of lap time for each driver in a race as an index
 The bar chart shows the average of lap time std between ranking 1 and 24. Except for the average of ranking 22 to 24, the rest average std are all around 9 without obvious fluctuation.
 Overall, the distribution of average std has no obvious difference, implying the lap time's distribution in a race has no impact on the driver’s final ranking.
 
-![](https://imgur.com/r4588hr.png)
+![!plot](./image/hypo4/Lap Time distribution.png)
 
 To strengthen the analytical results, we divided the data into two categories: high-ranking and low-ranking. 
 The high-ranking is defined by drivers winning the top 5 positions in a race, and drivers getting the rest position are classified as low-ranking.
@@ -212,7 +212,7 @@ We then used the categorized data to create histogram showing the correlation be
 In addition, we applied non-parametric Mann-Whitney U test to test if the two categories are significant different.
 Finally, the resulting P-value(0.308) higher than 0.05 indicates strong evidence for the null hypothesis: the difference is not statistically significant.
 
-![](https://imgur.com/mxBrEwq.png)
+![!plot](./image/hypo4/Lap Time distribution:ranking.png)
 
 Therefore, we concluded that we reject the hypothesis that evenly distributed lap time gives better results.
 
