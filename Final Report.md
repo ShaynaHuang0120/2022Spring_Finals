@@ -112,7 +112,7 @@ However, when drivers take 3 pit stops, their ranks are mainly distributed from 
 
 To strengthen the analysis result, we compare the rank distribution of drivers taking 1, 2 or 3 pit stops and test them with the non-parametric Mann-Whitney U tests.
 
-![](https://imgur.com/He5EIhD.png)
+![!plot](./image/hypo1/analysis_of_variance.png)
 
 The resulting p-values are range from 0.00000000000279 to 0.00008, meaning that all the tests are significant against the 0.05 significance level.
 Thus, we reject the null hypothesis and determine the rank distributions between drivers taking 1, 2 or 3 total pit stops are significantly different.
