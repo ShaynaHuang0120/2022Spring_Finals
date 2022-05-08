@@ -3,7 +3,7 @@
 ## Background
 Formula 1 (a.k.a. F1 or Formula One) is one of the most popular car racing competitions, receiving lots of attention and participation from worldwide car manufacturers and players. Being the highest class of single-seater auto racing, F1 is sanctioned by the Fédération Internationale 
 de l'Automobile (FIA) and is owned by the Formula One Group. 
-One of the fascinating components in F1 is the pit stop in which the players stop the car to perform maintenance such as tire replacement and fuel refilling within seconds. Thus, how to wisely utilize pit stops has become one popular topic in F1. And the authors of the previous project and we decided to focus on the strategies of F1 like pit stops distribution and eventually the effect on the ranking.
+One of the fascinating components in F1 is the pit stop in which the players stop the car to perform maintenance such as tire replacement and fuel refilling within seconds. Rules about pit stops keep revising and updating. And how to wisely utilize pit stops has become one popular topic in F1. And the authors of the previous project and we decided to focus on the strategies of F1 like pit stops distribution and eventually the effect on the ranking.
 
 ## Glossary
 - Pit stop
@@ -42,7 +42,7 @@ Data Source: https://www.kaggle.com/datasets/rohanrao/formula-1-world-championsh
 
 The dataset includes 14 CSV files for all the relevant information about F1 racing including circuits, drivers, races, results, lap times, pit stops, qualifying, championships, and constructors.
 #### 1.1.2 Original work Description
-Original Work GitHub Link: https://github.com/ho-yi-shiuan/2021_Spring_finals
+Original Work's GitHub Link: https://github.com/ho-yi-shiuan/2021_Spring_finals
 
 In their project, the authors analyzed the strategy of pit stops on race results of Formula One (F1). They proposed two hypotheses. The first one was "Less pit stops gives the driver better rank in each race."
 And the second was Laps of each pit stop time should be similar for better tire usage.
@@ -56,7 +56,7 @@ most of the pit stop timing was average and thus stated that they didn't have st
 
 ### 1.2 Critique of The Original Work
 #### 1.2.1 Hypotheses
-Their results didn't align with their graphic for the first hypothesis, as distributions changed when the pit stop number varied. Potential patterns appeared in their bar charts which we will investigate more.
+Their results didn't align with their graphic for the first hypothesis, as distributions did change when the pit stop number varied. Potential patterns appeared in their bar charts which we will investigate more.
 They also did not have any further substantial statistical methods to support their results further. 
 
 The second hypothesis was very unclear and confusing in general. 
@@ -65,11 +65,11 @@ Also, they failed to analyze the time pattern in the different number of pit sto
 
 #### 1.2.2 Coding
 We identified three major issues in their coding part. First, they had poor documentation since they missed end-user instruction, preventing any reviewer from understanding
-their whole project and code quickly and easily. Their docstrings were also low-quality. Many were short sentences and did not clearly reveal the actual goals and steps.
+their whole project or code quickly and easily. Their docstrings were also low-quality. Many were short sentences and did not clearly reveal the actual goals and steps.
 
-The authors also included redundant and necessary functions, such as read_data and delete_data. They merely utilized built-in functions in Pandas library without any additional code to improve the functionality.
+The original authors also included redundant and necessary functions, such as read_data and delete_data. They merely utilized built-in functions in Pandas library without any additional code to improve the functionality.
 
-Moreover, the whole coding part had low modularity. In detail, their "main function" part had many lines of unorganized code, even a for loop to plot the charts. Such a hard-core style significantly reduced the reusability and lowered the efficiency.
+Moreover, the whole coding part had low modularity. Their "main function" part had many lines of unorganized code, even a for loop to plot the charts. Such a hard-core style significantly reduced the reusability and lowered the efficiency.
 
 ### 1.3 Improvement Description
 
@@ -86,8 +86,6 @@ Our goals in this project includes two main parts and improvements:
   - Comprehensive docstrings and doctests 
   - High Modularity and usability
   - Efficiency techniques 
-
-  
 
 
 ## 2. Data Analytics of Racing Strategies of Formula One
@@ -213,7 +211,7 @@ We then used the categorized data to create histogram showing the correlation be
 In addition, we applied non-parametric Mann-Whitney U test to test if the two categories are significant different.
 Finally, the resulting P-value(0.308) higher than 0.05 indicates strong evidence for the null hypothesis: the difference is not statistically significant.
 
-![!plot](image/hypo4/LaptimeDistribution:ranking.png)
+![!plot](image/hypo4/LaptimeDistributionRanking.png)
 
 Therefore, we concluded that we reject the hypothesis that evenly distributed lap time gives better results.
 
@@ -221,7 +219,7 @@ Therefore, we concluded that we reject the hypothesis that evenly distributed la
 We had a tough time finding a suitable, relevant, and applicable data source. After failing to find a comparable data source containing pit stops, we decided to move on to other topics to conduct an exploratory analysis to show something exciting that can be utilized for further research.
 
 #### 2.3.1 Overview
-Therefore, we  utilize other available file in the F-1 dataset and other
+Therefore, we  utilized other available file in the F-1 dataset and other
 data source to conduct the descriptive analysis. In this case, we found that the car constructors and car groups
 presents some interesting patterns and trends regarding the winning times.
 
@@ -232,12 +230,12 @@ Source: https://www.kaggle.com/datasets/mlandry/formula-e-championship
 
 #### 2.3.3 F-1 Constructor Winning Distribution
 
-To understand the leading manufacturers in F-1, we utilize the results and constructor datasets to identify their winning frequency. By limiting the recent 10 years' F-1 races and filtering results that have positions less or equal to 3, we are thus able to create the distribution with the value_count and plot functions. 
+To understand the leading manufacturers in F-1, we utilized the results and constructor datasets to identify their winning frequency. By limiting the recent 10 years' F-1 races and filtering results that have positions less or equal to 3, we are thus able to create the distribution with the value_count and plot functions. 
 
 ![!plot](./image/Others/F1ConstructorWinTimes.png)
 
 As shown above, we identify that Mercedes, Red Bull, and Ferrari are leading constructors in F-1 as their total winning times are greater than those of the rest of the constructors. 
-In detail, Mercedes-Benz (MB)wined 281 times (obtaining the first 3 places) during the last ten years, showing its robust technology in F-1 racing car building. In other words, when we are anticipating the results of one racing game, we should always make bets on MB. 
+In detail, Mercedes-Benz (MB) wined 281 times (obtaining the first 3 places) during the last ten years, showing its robust technology in F-1 racing car building. In other words, when we are anticipating the results of one racing game, we should always make bets on MB. 
 
 #### 2.3.4 F-E Team Group Winning Distribution
 
@@ -262,7 +260,7 @@ Second, MB has a relatively stable pattern compared to the other two leading con
 
 #### 2.3.6 Summary of EDA
 
-To sum up, looking at constructors in F-1 and F-E competitions gives us a border understanding of F-1 racing beyond the racing strategies. Mercedes Benz is the most influential constructor in F-1 racing and holds its position steadily; however, it fails to dominate the electric car field and has a very poor performance in F-E events. The unstable winning trends also show why numerous fans love watching the event. Each race is full of uncertainties. 
+To sum up, looking at constructors in F-1 and F-E competitions gives us a border understanding of F-1 racing beyond the racing strategies. Mercedes Benz is the most influential constructor in F-1 racing and holds its position steadily; however, it fails to dominate the electric car competitions and thus has a very poor performance in F-E events. The unstable winning trends also show why numerous fans love watching the event. Each race is full of uncertainties. 
 People would never know the winners like in other competitions before the final lap. Moreover, as electric cars are becoming the mainstream and replacing fuel cars, many traditional but influencing constructors such as Red Bull are still reluctant to embrace the new technology. The future of car racing also becomes uncertain now. Will the F-E become the dominant racing event, and all other constructors join it? Or people will keep loving the old school and enjoy the F-1 event.
 ### 2.4. Results Summary
 
@@ -270,11 +268,9 @@ According to the results of the hypothesis tests under the topic of pit-stopping
 
 We learned that the strategy of having fewer pit stops appears to have a positive effect on giving the driver a better rank in races. We suspect the reason behind this phenomenon is that the drivers who choose to pit fewer tend to have confidence in their equipment so that they think only one pit or two could be enough for the entire race. Conversely, their confidence could be from the quality and stability of their equipment, and, thus, the quality and stability lower the chances of accidents or equipment malfunctions. 
 
-We learned that the pit stops are not ideally evenly distributed throughout the races. Instead, it seems that the drivers tend to pit before arriving at the evenly dividing points. Such a shift in the distribution could be accounted for that the drivers will follow their pit-stopping plans and usually will only pit in advance when they think something goes wrong.
+Meanwhile, we also discovered that the pit stops are not ideally evenly distributed throughout the races. Instead, it seems that the drivers tend to pit before arriving at the evenly dividing points. Such a shift in the distribution could be accounted for that the drivers will follow their pit-stopping plans and usually will only pit in advance when they think something goes wrong.
 
-We learned that the drivers who distribute the lap proportions of their pit stop evenly tend to have better race results. The better usage of equipment (tires, gasoline, ...) could be part of the contributing factor to such a phenomenon.
-
-
+Last but not least, we concluded that the drivers who distribute the lap proportions of their pit stop evenly tend to have better race results. The better usage of equipment (tires, gasoline, ...) could be part of the contributing factor to such a phenomenon.
 
 
 
