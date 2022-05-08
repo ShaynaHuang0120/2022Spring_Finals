@@ -123,13 +123,13 @@ In conclusion, we accept the hypothesis that fewer pit stops give the driver a b
 
 Before we move on to the next hypothesis, let us introduce the concept we call 'Lap Proportion'. Lap proportion represents where or when the driver pit in a race, which we measure by dividing the number of laps the driver has already finished (*pit lap) by the total laps required to finish for that race.
 
-![](https://i.imgur.com/mxcMgDn.png)
+![!plot](image/hypo2/mxcMgDn.png)
 
 If we look at the distribution of the lap proportions of all the pit stop records, we can notice there seems to be a pattern. Here are what they look like in histograms.
 
-![](https://i.imgur.com/WsPxIa7.png)
-![](https://i.imgur.com/B3pgzDE.png)
-![](https://i.imgur.com/ZVhOevG.png)
+![!plot](image/hypo2/distribution_1.png)
+![!plot](image/hypo2/distribution_2.png)
+![!plot](image/hypo2/distribution_3.png)
 
 As shown, for each number of pit stops a team chose for the entire race, there appears to be a pattern in when they chose to pit. If the team chooses to pit only once in the entire race, they usually pit at the half of the race. If the team chooses to pit twice, they usually pit when it's near 1/3 and 2/3 of the total laps. The case is similar if they choose to pit thrice. 
 
@@ -140,10 +140,11 @@ There is one property of the Lap Proportion column that we should notice. The nu
 
 However, the distribution statistics of these groups resemble the characteristics of normal distributions very well: All the data groups are distributed symmetrically around the mean, with around 68% falling within one standard deviation, and with around 95% falling within two standard deviations. It would also be intuitive that such a distribution would follow a distribution similar to the normal distribution. Hence, we only assume that pit stop time points of each group are normally distributed given a broader definition. 
 
-Here are the statistics and p values we calculated for each data group. 
-![](https://i.imgur.com/GdxCG8P.png)
-![](https://i.imgur.com/RTMAeDZ.png)
-![](https://i.imgur.com/nhYVxf0.png)
+Here are the statistics and p values we calculated for each data group.
+
+![!plot](image/hypo2/GdxCG8P.png)
+![!plot](image/hypo2/RTMAeDZ.png)
+![!plot](image/hypo2/nhYVxf0.png)
 
 Assuming these groups of data are normally distributed, we notice that the means deviate quite a bit from the ideal dividing points (1/2, 1/3, 2/3, etc.). Using one sample T-Tests, we calculated the p values for each group, and the results show that all the p values are significantly lower than the significant level of 0.05, with differences of at least 20 orders of magnitude.
 
@@ -158,39 +159,39 @@ To learn about the differences in the distributions of the pit stops of differen
 
 #### Total Pit Stop = 1
 ##### no. 1 pit stop
-![](https://i.imgur.com/uPzYobQ.png)
+![!plot](image/hypo3/distribution_1_1.png)
 #### Total Pit Stop = 2
 ##### no. 1 pit stop
-![](https://i.imgur.com/VLSGqcK.png)
+![!plot](image/hypo3/distribution_2_1.png)
 ##### no. 2 pit stop
-![](https://i.imgur.com/4IRprQS.png)
+![!plot](image/hypo3/distribution_2_2.png)
 #### Total Pit Stop = 3
 ##### no. 1 pit stop
-![](https://i.imgur.com/9wuGEoW.png)
+![!plot](image/hypo3/distribution_3_1.png)
 ##### no. 2 pit stop
-![](https://i.imgur.com/S6mo1UB.png)
+![!plot](image/hypo3/distribution_3_2.png)
 ##### no. 3 pit stop
-![](https://i.imgur.com/rwT1js2.png)
+![!plot](image/hypo3/distribution_3_3.png)
 
 From the histogram plots above, we can tell that the Lap Proportion distributions of the higher-ranking results are more evenly distributed across the entire race than the lower-ranking results. 
 
 The differences are statistically significant given the significance level of 0.05 for some pit stop orders, including the first pit of a total of 2 pit stops and all three pits of the total 3 pit stops. Here are the statistics for each data group.
 
-![](https://i.imgur.com/EiEiMJ1.png)
+![!plot](image/hypo3/EiEiMJ1.png)
 
 We can use an alternative view of the data to measure the deviation, by using the average deviations of how far the lap proportions of all pit records from each driver from each race are away from the evenly dividing points. 
 
-![](https://i.imgur.com/S2IoesM.png)
+![!plot](image/hypo3/S2IoesM.png)
 
 In this way, we can treat the pit distributing strategy of each race as a whole factor to measure how the driver performed in that race.
 
-![](https://i.imgur.com/Zez7YAu.png)
-![](https://i.imgur.com/7HwUJ4s.png)
-![](https://i.imgur.com/kuesDYy.png)
+![!plot](image/hypo3/err_mean_0.png)
+![!plot](image/hypo3/err_mean_1.png)
+![!plot](image/hypo3/err_mean_2.png)
 
 Similarly, we compare the results of higher ranking drivers with the lower ranking drivers and test them with the non-parametric Mann-Whitney U tests, with resulting p-values ranging from 0.002 to 0.022, meaning that all of the tests are significant against the 0.05 significance level.
 
-![](https://i.imgur.com/Y91I5E2.png)
+![!plot](image/hypo3/Y91I5E2.png)
 
 Thus, we concluded that we accept the null hypothesis that the evenly distributed pit stops give better racing results.
  
